@@ -1,0 +1,57 @@
+//Searching by text - youll get an id and title back
+const API_KEY = "2901de0d76fa46d1a71c015c429873f6";
+router.get('/', function (req, res) {
+    const query = "chicken";
+    
+    axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=${API_KEY}&number=2`)
+        .then(function (response) {
+            console.log(response.data);
+
+            //res.render('searchRecipes/index',{data})
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+  
+});
+
+
+
+
+//Getting ingredients. Need the id from original searchRecipes
+const API_KEY = "2901de0d76fa46d1a71c015c429873f6";
+router.get('/', function (req, res) {
+    
+    const id = 716342;
+    axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`)
+        .then(function (response) {
+            console.log(response.data.extendedIngredients);
+
+            //res.render('searchRecipes/index',{data})
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+  
+});
+
+//Get Instructions
+const API_KEY = "2901de0d76fa46d1a71c015c429873f6";
+router.get('/', function (req, res) {
+    
+    const id = 716342;
+
+    axios.get(`https://api.spoonacular.com/recipes/${id}/analyzedInstructions?apiKey=${API_KEY}`)
+        .then(function (response) {
+            console.log(response.data[0].steps);
+
+            //res.render('searchRecipes/index',{data})
+        })
+        .catch(function (err) {
+            console.log(err);
+        });
+
+  
+});

@@ -1,0 +1,22 @@
+sequelize model:create --name RecipeCategory --attributes categoryName:string;
+
+
+sequelize model:create --name Recipe --attributes recipeName:string,numSteps:integer,recipeCategoryId:integer,userId:integer;
+
+
+sequelize model:create --name IngredientList --attributes ingredientName:string,ingredientQuantity:string,quantityUnit:string,recipeId:integer;
+
+
+sequelize model:create --name RecipeStep --attributes stepNumber:string,instructions:string,imageURL:string,recipeId:integer;
+
+
+sequelize model:create --name Menu --attributes dateToMake:string,recipeId:integer;
+
+
+sequelize model:create --name ShoppingList --attributes shoppingListItem:string,ingredientQuantity:integer,quantityUnit:string;
+
+
+sequelize model:create --name PantryCategory --attributes categoryName:string;
+
+
+sequelize model:create --name PantryStockList --attributes itemName:string,inStock:boolean,pantryCategoryId:integer;
