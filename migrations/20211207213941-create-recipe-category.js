@@ -1,6 +1,7 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable('RecipeCategories');
     await queryInterface.createTable('RecipeCategories', {
       id: {
         allowNull: false,

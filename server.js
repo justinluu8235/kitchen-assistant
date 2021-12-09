@@ -14,7 +14,7 @@ const SECRET_SESSION = process.env.SECRET_SESSION;
 app.set('view engine', 'ejs');
 
 app.use(require('morgan')('dev'));    //morgan is for testing
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 app.use(layouts);
 app.use(methodOverride('_method'));

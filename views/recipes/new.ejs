@@ -1,11 +1,61 @@
 <form action="/recipes" method="post">
-
   <label for="recipeName">Recipe Name</label>
   <input type="text" name="recipeName" />
 
   <label for="categoryName">Recipe Category</label>
   <input type="text" name="categoryName" />
 
+  <br />
 
+
+  <div class="all-ingredients">
+    <label for="ingredientName">Ingredient Name</label>
+    <input type="text" name="ingredientName" />
+
+    <label for="ingredientQuantity">Ingredient Quantity</label>
+    <input type="text" name="ingredientQuantity" />
+
+    <label for="quantityUnit">Measurement Unit</label>
+    <input type="text" name="quantityUnit" />
+
+    <br />
+    <div class="new-ingredient">
+      <label for="ingredientName">Ingredient Name</label>
+      <input type="text" name="ingredientName" />
+
+      <label for="ingredientQuantity">Ingredient Quantity</label>
+      <input type="text" name="ingredientQuantity" />
+
+      <label for="quantityUnit">Measurement Unit</label>
+      <input type="text" name="quantityUnit" />
+      <br />
+    </div>
+  </div>
+  <label for="button"></label>
+  <input type="button" name="button" value="Add another Ingredient" id="addIngredientButton" />
+
+
+  <div class="all-recipe-steps">
+
+      <label for="instructions">Instructions</label>
+      <input type="text" name="instructions" />
+      <br>
+
+      <div class="new-recipe-step">
+      <label for="instructions">Instructions</label>
+      <input type="text" name="instructions" />
+      <br>
+      </div>
+  </div>
+  <label for="button"></label>
+  <input type="button" name="button" value="Add another Step"  id="addRecipeStepButton" />
+
+
+
+
+
+  <br /><br /><br />
   <input type="submit" />
 </form>
+
+<script src="/js/recipes_new.js"></script>
