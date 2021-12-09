@@ -1,11 +1,9 @@
-<% for(let i=0; i<data.length; i++){ %> 
-<%let recipe = data[i].recipe %> 
-<% let ingredients = recipe.ingredients %> 
-<%= recipe.label %> 
-<br>
-    <% for(let i=0; i<ingredients.length; i++){ %> 
-    <% let ingredientItem = ingredients[i]%> 
-    <%= ingredientItem.text %> 
-    <br>
-    <%}%>
-<%}%>
+<form action="/searchRecipes" method="POST">
+    <label for="query">Search Recipes</label>
+    <input type="text" name="query" />
+
+    <input type="submit" />
+
+</form>
+
+<!-- <script src="/js/searchRecipes_index.js"></script> -->

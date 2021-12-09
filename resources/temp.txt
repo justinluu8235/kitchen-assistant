@@ -10,3 +10,16 @@
     <label for="quantityUnit">Unit</label>
     <input type="text" name="quantityUnit" />
   </div>
+
+
+<% for(let i=0; i<data.length; i++){ %> 
+<%let recipe = data[i].recipe %> 
+<% let ingredients = recipe.ingredients %> 
+<%= recipe.label %> 
+<br>
+    <% for(let i=0; i<ingredients.length; i++){ %> 
+    <% let ingredientItem = ingredients[i]%> 
+    <%= ingredientItem.text %> 
+    <br>
+    <%}%>
+<%}%>

@@ -2,16 +2,31 @@ const express = require('express');
 const { RowDescriptionMessage } = require('pg-protocol/dist/messages');
 const router = express.Router();
 const isLoggedIn = require('../middleware/isLoggedIn');
-const { Recipe, User, RecipeCategory, IngredientList } = require('../models');
+const { Recipe, User, RecipeCategory, IngredientList, RecipeStep} = require('../models');
 const user = require('../models/user');
+
+
+
+router.get('/', isLoggedIn, async function (req, res) {
+   
+    try{
+        let allRecipes = await Recipe.findAll();
+        res.render('recipes/index', {allRecipes});
+    }
+    catch(err){
+
+    }
+});
+
 
 //Create a new recipe page
 router.get('/new', isLoggedIn, function (req, res) {
     res.render('recipes/new');
 });
 
+
 //Get Route - Edit an individual recipe. Get that recipe's info
-router.get('/edit/:id', async function (req, res){
+router.get('/edit/:id', async function (req, res) {
     let recipeID = Number(req.params.id);
     let recipeCategoryID;
     let recipe;
@@ -34,7 +49,7 @@ router.get('/edit/:id', async function (req, res){
     catch (err) {
         console.log(err);
     }
-    
+
     try {
         ingredientsArr = await recipe.getIngredientLists();
 
@@ -42,23 +57,23 @@ router.get('/edit/:id', async function (req, res){
     catch (err) {
         console.log(err);
     }
-    
+
 
     try {
         recipeStepsArr = await recipe.getRecipeSteps();
 
-   }
-   catch (err) {
-       console.log(err);
-   }
+    }
+    catch (err) {
+        console.log(err);
+    }
 
     let number = 5;
-    res.render('recipes/edit', {recipe, recipeCategory, recipeStepsArr, ingredientsArr})
+    res.render('recipes/edit', { recipe, recipeCategory, recipeStepsArr, ingredientsArr })
 })
 
 
 //View an individual recipe
-router.get('/:id', async function(req,res){
+router.get('/:id', async function (req, res) {
     let recipeID = Number(req.params.id);
     let recipe;
     let ingredientsArr;
@@ -78,19 +93,18 @@ router.get('/:id', async function(req,res){
     catch (err) {
         console.log(err);
     }
-    
+
 
     try {
         recipeStepsArr = await recipe.getRecipeSteps();
 
-   }
-   catch (err) {
-       console.log(err);
-   }
+    }
+    catch (err) {
+        console.log(err);
+    }
 
-   res.render('recipes/show', {recipe, recipeStepsArr, ingredientsArr});
-   console.log(recipeStepsArr);
-   console.log(ingredientsArr);
+    res.render('recipes/show', { recipe, recipeStepsArr, ingredientsArr });
+  
 
 })
 
@@ -101,14 +115,15 @@ router.get('/:id', async function(req,res){
 //Take in recipe name and create a recipe 
 router.post('/', isLoggedIn, async function (req, res) {
     let userId = req.user.get().id;
+
     //Create a Recipe and grab its id
     let recipeId = await addRecipe(userId, req.body.recipeName, req.body.categoryName);
-    for(let i=0; i<req.body.ingredientName.length; i++){
+    for (let i = 0; i < req.body.ingredientName.length; i++) {
         await addIngredients(recipeId, req.body.ingredientName[i], req.body.ingredientQuantity[i], req.body.quantityUnit[i]);
     }
 
-    for(let i=0; i<req.body.instructions.length; i++){
-        await addRecipeSteps(recipeId, i+1, req.body.instructions[i]);
+    for (let i = 0; i < req.body.instructions.length; i++) {
+        await addRecipeSteps(recipeId, i + 1, req.body.instructions[i]);
     }
 
     res.redirect(`recipes/${recipeId}`);
@@ -117,13 +132,13 @@ router.post('/', isLoggedIn, async function (req, res) {
 
 
 //Put - Save edited data of an Recipe
-router.put('/:id', async function(req,res){
+router.put('/:id', async function (req, res) {
     let recipeID = Number(req.params.id);
     await updateRecipe(recipeID, req.body.recipeName, req.body.categoryName);
-    
-    await updateIngredients(recipeID, req.body.ingredientName, req.body.ingredientQuantity, req.body.quantityUnit);
-    
 
+    await updateIngredients(recipeID, req.body.ingredientName, req.body.ingredientQuantity, req.body.quantityUnit);
+
+    await updateRecipeSteps(recipeID, req.body.instructions);
 
     res.redirect(`/recipes/${recipeID}`);
 })
@@ -165,8 +180,8 @@ async function addRecipe(userId, name, category) {
             }
         });
         let recipeCategory = result[0];
-            recipeCategory.addRecipe(newRecipe);
-            recipeCategory.save();
+        recipeCategory.addRecipe(newRecipe);
+        recipeCategory.save();
     }
     catch (err) {
         console.log(err);
@@ -174,11 +189,11 @@ async function addRecipe(userId, name, category) {
 
 
     return await newRecipe.toJSON().id;
-   
-    
+
+
 }
 
-async function addIngredients(recipeId, ingredient, quantity, unit){
+async function addIngredients(recipeId, ingredient, quantity, unit) {
     let recipe;
     //Grab the recipe
     try {
@@ -188,11 +203,11 @@ async function addIngredients(recipeId, ingredient, quantity, unit){
         console.log(err);
     }
 
-    try{
+    try {
         recipe.createIngredientList({
-            ingredientName:ingredient,
-            ingredientQuantity: quantity, 
-            quantityUnit:unit
+            ingredientName: ingredient,
+            ingredientQuantity: quantity,
+            quantityUnit: unit
         })
     }
     catch (err) {
@@ -203,7 +218,7 @@ async function addIngredients(recipeId, ingredient, quantity, unit){
 }
 
 
-async function addRecipeSteps(recipeId, stepNum, instructionString){
+async function addRecipeSteps(recipeId, stepNum, instructionString) {
     let recipe;
     //Grab the recipe
     try {
@@ -213,7 +228,7 @@ async function addRecipeSteps(recipeId, stepNum, instructionString){
         console.log(err);
     }
 
-    try{
+    try {
         recipe.createRecipeStep({
             stepNumber: stepNum,
             instructions: instructionString,
@@ -227,17 +242,17 @@ async function addRecipeSteps(recipeId, stepNum, instructionString){
 }
 
 
-async function updateRecipe(recipeID, name, category){
+async function updateRecipe(recipeID, name, category) {
     let recipeCategoryID;
-     //Find or Create the Recipe Category and get the ID.
-     try {
+    //Find or Create the Recipe Category and get the ID.
+    try {
         result = await RecipeCategory.findOrCreate({
             where: {
                 categoryName: category
             }
         });
         let recipeCategory = result[0];
-        recipeCategoryID = recipeCategory.toJSON().id;       
+        recipeCategoryID = recipeCategory.toJSON().id;
     }
     catch (err) {
         console.log(err);
@@ -248,12 +263,12 @@ async function updateRecipe(recipeID, name, category){
             recipeName: name,
             recipeCategoryId: recipeCategoryID
         },
-        {
-            where: {
-                id:recipeID
+            {
+                where: {
+                    id: recipeID
+                }
             }
-        }
-        ); 
+        );
     }
     catch (err) {
         console.log(err);
@@ -263,7 +278,7 @@ async function updateRecipe(recipeID, name, category){
 
 }
 
-async function updateIngredients(recipeID, ingredientNameArr, quantityArr, unitArr){
+async function updateIngredients(recipeID, ingredientNameArr, quantityArr, unitArr) {
     let recipe;
     let ingredientsArr;
     //Grab the recipe
@@ -282,26 +297,201 @@ async function updateIngredients(recipeID, ingredientNameArr, quantityArr, unitA
         console.log(err);
     }
 
-    for(let i=0; i<ingredientsArr.length; i++){
-        let ingredient = ingredientsArr[i];
-        let ingredientID = ingredient.toJSON().id;
-        try {
-            await ingredient.update({
-                ingredientName: ingredientNameArr[i],
-                ingredientQuantity: quantityArr[i],
-                quantityUnit: unitArr[i]
-            },{
-                where:ingredientID
-            })
+
+    //If the amount of edited ingredients is less than what it started with 
+    if (ingredientsArr.length > ingredientNameArr.length) {
+        //Update what's there
+        for (let i = 0; i < ingredientNameArr.length; i++) {
+            let ingredient = ingredientsArr[i];
+            let ingredientID = ingredient.toJSON().id;
+            try {
+                await ingredient.update({
+                    ingredientName: ingredientNameArr[i],
+                    ingredientQuantity: quantityArr[i],
+                    quantityUnit: unitArr[i]
+                }, {
+                    where: ingredientID
+                })
+            }
+            catch (err) {
+                console.log(err);
+            }
         }
-        catch (err) {
-            console.log(err);
+        //Delete the extra ones on the database
+        for (let i = ingredientNameArr.length; i < ingredientsArr.length; i++) {
+            let ingredient = ingredientsArr[i];
+            let ingredientID = ingredient.toJSON().id;
+            try {
+                await IngredientList.destroy({
+                    where: {
+                        id: ingredientID
+                    }
+                })
+            }
+            catch (err) {
+                console.log(err);
+            }
+        }
+
+
+    }
+    //If amount of ingredients is more than what we started with
+    else if (ingredientNameArr.length > ingredientsArr.length) {
+        //Update what's in the database
+        for (let i = 0; i < ingredientsArr.length; i++) {
+            let ingredient = ingredientsArr[i];
+            let ingredientID = ingredient.toJSON().id;
+            try {
+                await ingredient.update({
+                    ingredientName: ingredientNameArr[i],
+                    ingredientQuantity: quantityArr[i],
+                    quantityUnit: unitArr[i]
+                }, {
+                    where: ingredientID
+                })
+            }
+            catch (err) {
+                console.log(err);
+            }
+        }
+
+        //Anything extra, create a new one 
+        for (let i = ingredientsArr.length; i < ingredientNameArr.length; i++) {
+            try{
+            await addIngredients(recipeID, ingredientNameArr[i], quantityArr[i], unitArr[i]);
+            }
+            catch(err){
+                console.log(err)
+            }
+        }
+    }
+    else {
+        for (let i = 0; i < ingredientsArr.length; i++) {
+            let ingredient = ingredientsArr[i];
+            let ingredientID = ingredient.toJSON().id;
+            try {
+                await ingredient.update({
+                    ingredientName: ingredientNameArr[i],
+                    ingredientQuantity: quantityArr[i],
+                    quantityUnit: unitArr[i]
+                }, {
+                    where: ingredientID
+                })
+            }
+            catch (err) {
+                console.log(err);
+            }
+        }
+    }
+
+}
+
+async function updateRecipeSteps(recipeID, instructionsArr) {
+    let recipe;
+    let recipeStepArr;
+    //Grab the recipe
+    try {
+        recipe = await Recipe.findByPk(recipeID);
+    }
+    catch (err) {
+        console.log(err);
+    }
+
+    try {
+        recipeStepArr = await recipe.getRecipeSteps({
+        
+            order:['stepNumber'],
+        });
+
+    }
+    catch (err) {
+        console.log(err);
+    }
+
+    //if amount of instructions is less than before editing
+    if (instructionsArr.length < recipeStepArr.length) {
+        //Update what's there
+        for (let i = 0; i < instructionsArr.length; i++) {
+            let instruction = recipeStepArr[i];
+            let instructionID = instruction.toJSON().id;
+            try {
+                await instruction.update({
+                    stepNumber: i + 1,
+                    instructions: instructionsArr[i]
+                }, {
+                    where: instructionID
+                })
+            }
+            catch (err) {
+                console.log(err);
+            }
+        }
+        //Destroy the extra in the database
+        for (let i = instructionsArr.length; i < recipeStepArr.length; i++) {
+            let instruction = recipeStepArr[i];
+            console.log(instruction.toJSON());
+            let instructionID = instruction.toJSON().id;
+            try {
+                await RecipeStep.destroy({
+                    where: {
+                        id: instructionID
+                    }
+                })
+            }
+            catch (err) {
+                console.log(err);
+            }
+        }
+    }
+    //Amount of instruction is more than in our db
+    else if (instructionsArr.length > recipeStepArr.length) {
+        //Update what's there
+        for (let i = 0; i < recipeStepArr.length; i++) {
+            let instruction = recipeStepArr[i];
+            let instructionID = instruction.toJSON().id;
+            try {
+                await instruction.update({
+                    stepNumber: i + 1,
+                    instructions: instructionsArr[i]
+                }, {
+                    where: instructionID
+                })
+            }
+            catch (err) {
+                console.log(err);
+            }
+        }
+
+        //Create the rest
+        for (let i = recipeStepArr.length; i < instructionsArr.length; i++) {
+      
+            try {
+                await addRecipeSteps(recipeID, i+1, instructionsArr[i]);
+            }
+            catch (err) {
+                console.log(err);
+            }
+        }
+    }
+    else{
+        for (let i = 0; i < instructionsArr.length; i++) {
+            let instruction = recipeStepArr[i];
+            let instructionID = instruction.toJSON().id;
+            try {
+                await instruction.update({
+                    stepNumber: i + 1,
+                    instructions: instructionsArr[i]
+                }, {
+                    where: instructionID
+                })
+            }
+            catch (err) {
+                console.log(err);
+            }
         }
     }
 
 
 }
-
-
 
 module.exports = router;
