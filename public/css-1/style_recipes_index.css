@@ -1,0 +1,6 @@
+.recipe-card{
+    background-color:grey;
+    height: 20vh;
+    width: 20vh;
+    display:inline-block;
+}

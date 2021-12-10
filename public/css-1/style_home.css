@@ -1,0 +1,18 @@
+.header{
+    background-color:salmon;
+    width: 100vw;
+    height: 20vh;
+}
+.band{
+    background-color:lightgray;
+    width: 100vw;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.nav-items{
+    margin-left:10px;
+    margin-right:10px;
+}
