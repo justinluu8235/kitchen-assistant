@@ -1,61 +1,140 @@
-<form action="/recipes" method="post">
-  <label for="recipeName">Recipe Name</label>
-  <input type="text" name="recipeName" />
+<script src="/js/pantry_index.js"></script>
 
-  <label for="categoryName">Recipe Category</label>
-  <input type="text" name="categoryName" />
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cards List - Bulma Templates</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css"
+    />
+    <script
+      src="https://kit.fontawesome.com/7dc3015a44.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <link rel="stylesheet" href="../css-1/card_shoppingList_index.css" />
+  </head>
 
-  <br />
-
-
-  <div class="all-ingredients">
-    <label for="ingredientName">Ingredient Name</label>
-    <input type="text" name="ingredientName" />
-
-    <label for="ingredientQuantity">Ingredient Quantity</label>
-    <input type="text" name="ingredientQuantity" />
-
-    <label for="quantityUnit">Measurement Unit</label>
-    <input type="text" name="quantityUnit" />
-
-    <br />
-    <div class="new-ingredient">
-      <label for="ingredientName">Ingredient Name</label>
-      <input type="text" name="ingredientName" />
-
-      <label for="ingredientQuantity">Ingredient Quantity</label>
-      <input type="text" name="ingredientQuantity" />
-
-      <label for="quantityUnit">Measurement Unit</label>
-      <input type="text" name="quantityUnit" />
-      <br />
-    </div>
-  </div>
-  <label for="button"></label>
-  <input type="button" name="button" value="Add another Ingredient" id="addIngredientButton" />
-
-
-  <div class="all-recipe-steps">
-
-      <label for="instructions">Instructions</label>
-      <input type="text" name="instructions" />
-      <br>
-
-      <div class="new-recipe-step">
-      <label for="instructions">Instructions</label>
-      <input type="text" name="instructions" />
-      <br>
+  <body>
+    <!-- START NAV -->
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/"> Kitchen Assistant </a>
+          <span class="navbar-burger burger" data-target="navbarMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+        <div id="navbarMenu" class="navbar-menu">
+          <div class="navbar-end">
+            <a class="navbar-item is-active" href="/pantry"> Pantry </a>
+            <a class="navbar-item" href="/menu"> Menu </a>
+            <a class="navbar-item" href="/recipes"> My Recipes </a>
+            <a class="navbar-item" href="/shoppingList"> Shopping List </a>
+            <a class="navbar-item" href="/searchRecipes"> Search Recipes </a>
+          </div>
+        </div>
       </div>
-  </div>
-  <label for="button"></label>
-  <input type="button" name="button" value="Add another Step"  id="addRecipeStepButton" />
+    </nav>
+    <!-- END NAV -->
+
+    <div class="container">
+      
+      <div class="section">
+        <div id="app" class="row columns is-multiline">
+          <div v-for="card in cardData" key="card.id" class="column is-4" id="column" >
+            <div class="card large" id="card-large">
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-content">
+                    <p class="title is-4 no-padding">Add a Recipe</p>
 
 
+                          <div class="list-item">
+                            <p class="pantry-item">
+                                <span class="title is-6"> 
+                                  <form action="/recipes" method="post">
+                                    <label for="recipeName"><p>Recipe Name</p></label>
+                                    <input type="text" name="recipeName" />
+                                    <label for="categoryName"><p>Recipe Category</p></label>„
+                                    <input type="text" name="categoryName" />
+                                
+                                  
+                                    <br />
+                                  
+                                  
+                                    <div class="all-ingredients">
+                                      <p>Ingredient Name</p>
+                                      <input type="text" name="ingredientName" />
+                                  
+                                      <label for="ingredientQuantity"><p>Ingredient Quantity</p></label>
+                                      <input type="text" name="ingredientQuantity" />
+                                  
+                                      <label for="quantityUnit"><p>Measurement Unit</p></label>
+                                      <input type="text" name="quantityUnit" />
+                                  
+                                      <br />
+                                      <div class="new-ingredient">
+                                        <label for="ingredientName"><p>Ingredient Name</p></label>
+                                        <input type="text" name="ingredientName" />
+                                  
+                                        <label for="ingredientQuantity"><p>Ingredient Quantity</p></label>
+                                        <input type="text" name="ingredientQuantity" />
+                                  
+                                        <label for="quantityUnit"><p>Measurement Unit</p></label>
+                                        <input type="text" name="quantityUnit" />
+                                        <br />
+                                      </div>
+                                    </div>
+                                    <label for="button"></label>
+                                    <input type="button" name="button" value="Add another Ingredient" id="addIngredientButton" />
+                                  
+                                  
+                                    <div class="all-recipe-steps">
+                                  
+                                        <label for="instructions">Instructions</label>
+                                        <input type="text" name="instructions" />
+                                        <br>
+                                  
+                                        <div class="new-recipe-step">
+                                        <label for="instructions">Instructions</label>
+                                        <input type="text" name="instructions" />
+                                        <br>
+                                        </div>
+                                    </div>
+                                    <label for="button"></label>
+                                    <input type="button" name="button" value="Add another Step"  id="addRecipeStepButton" />
+                                  
+                                  
+                                  
+                                  
+                                  
+                                    <br /><br /><br />
+                                    <input type="submit" />
+                                  </form>
+                                </span>
+                            </p>
 
+                           
+                          </div>
+              
+                      
+                  </div>
+                </div>
+                <div class="content"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-
-  <br /><br /><br />
-  <input type="submit" />
-</form>
-
-<script src="/js/recipes_new.js"></script>
+    <script src="../js/cardsData.js"></script>
+  </body>
+</html>

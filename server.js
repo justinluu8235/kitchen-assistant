@@ -56,7 +56,7 @@ app.use('/searchRecipes', require('./controllers/searchRecipes'));
 
 
 
-app.get('/', (req, res) => {
+app.get('/', isLoggedIn, (req, res) => {
   res.render('index');
 })
 

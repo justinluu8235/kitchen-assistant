@@ -1,19 +1,132 @@
-<% for(let date in menu){ %> 
-    <% let menuItemArr = menu[date] %> 
-    <h1><%= date %> </h1>
-    
-    <% for(let i=0; i<menuItemArr.length;i++){ %> 
-        <% let recipe = menuItemArr[i] %> 
-        <%= recipe.recipeName %>
-        <a href="/recipes/<%=recipe.id%>">View Recipe</a>
-        <form action="/recipes/<%=recipe.id%>" method="POST">
-            <input type="submit" value="Add Ingredients to Shopping List" />
-          </form>
 
-          <form action="/menu/<%=recipe.menuId%>/?_method=DELETE" method="POST">
-            <input type="submit" value="Remove from Menu">
-        </form>
+
     
 
-    <% } %> 
-<% } %> 
+       
+        
+       
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cards List - Bulma Templates</title>
+    <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
+    <script src="https://kit.fontawesome.com/7dc3015a44.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <link rel="stylesheet" href="../css-1/card_menu_index.css">
+  </head>
+
+  <body>
+
+    <!-- START NAV -->
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+            Kitchen Assistant
+          </a>
+          <span class="navbar-burger burger" data-target="navbarMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+        <div id="navbarMenu" class="navbar-menu">
+          <div class="navbar-end">
+            <a class="navbar-item is-active" href="/menu">
+              Menu
+            </a>
+            <a class="navbar-item" href="/recipes">
+              My Recipes
+            </a>
+            <a class="navbar-item" href="/shoppingList">
+              Shopping List
+            </a>
+            <a class="navbar-item" href="/pantry">
+              Pantry
+            </a>
+            <a class="navbar-item" href="/searchRecipes">
+              Search Recipes
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- END NAV -->
+
+    <div class="container">
+        <% for(let date in menu){ %> 
+            <% let menuItemArr = menu[date] %> 
+      <div class="section">
+        <div class="columns">
+          <div class="column has-text-centered">
+            <h1 class="title" style="color: darkblue;"><%= date %></h1><br>
+          </div>
+        </div>
+        <div id="app" class="row columns is-multiline">
+            <% for(let i=0; i<menuItemArr.length;i++){ %> 
+                <% let recipe = menuItemArr[i] %> 
+          <div v-for="card in cardData" key="card.id" class="column is-4">
+            <div class="card large">
+              <div class="card-image" class="recipe-image">
+                <figure class="image is-16by9">
+                  <img :src="card.image" alt="Image">
+                </figure>
+              </div>
+              <div class="card-content">
+                <div class="media">
+                 
+                  <div class="media-content">
+
+
+                    <p class="title is-4 no-padding"> <%= recipe.recipeName %></p>
+                   
+            
+                      
+                
+                    <p>
+                      <span class="title is-6">
+                        <a href="/recipes/<%=recipe.id%>">View Recipe</a> </span> </p>
+                    <p>
+                      <span class="title is-6"> <form action="/recipes/<%=recipe.id%>" method="POST">
+                        <input type="submit" value="Add Ingredients to Shopping List" />
+                      </form>
+                        </span> </p>
+                        <p>
+                          <span class="title is-6"><form action="/menu/<%=recipe.menuId%>/?_method=DELETE" method="POST">
+                            <input type="submit" value="Remove from Menu">
+                        </form>
+                             </span> </p>
+                
+                  </div>
+                </div>
+                <div class="content">
+
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <% } %> 
+
+
+        </div>
+      </div>
+      <% } %> 
+    </div>
+  
+
+    <script src="../js/cardsData.js"></script>
+
+  </body>
+
+</html>

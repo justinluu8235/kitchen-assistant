@@ -1,35 +1,145 @@
 
-<h1>Pantry Items</h1>
-<% for(let i=0; i<listList.length; i++) {%> 
-<% let listItem = listList[i].toJSON()%> 
-<% let inStockString = "Out of Stock"; %> 
-<%if(listItem.inStock){%> 
-    <% inStockString = "In Stock" %> 
-    <% } %> 
-<%= listItem.itemName %> 
-
-<form action="/pantry/<%=listItem.id%>/?_method=PUT" method="POST">
-   
-    <input type="submit" value="<%=inStockString%>" id="stockButton">
-</form>
-
-<form action="/pantry/<%=listItem.id%>/?_method=DELETE" method="POST">
-    <input type="submit" value="Remove">
-</form>
-<br>
-<%}%> 
 
 
-<form action="/pantry" method="POST">
-    <p>Add a new item </p>
-    <label for="itemName">Item Name:</label>
-    <input type="text" name="itemName" />
-
-    <label for="categoryName">Category Name:</label>
-    <input type="text" name="categoryName" />
-
-    <input type="submit" />
-</form>
+    <script src="/js/pantry_index.js"></script>
 
 
-<script src="/js/pantry_index.js"></script>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Cards List - Bulma Templates</title>
+        <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
+        <script src="https://kit.fontawesome.com/7dc3015a44.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <link rel="stylesheet" href="../css-1/card_pantry_index.css">
+    </head>
+
+    <body>
+
+        <!-- START NAV -->
+        <nav class="navbar">
+            <div class="container">
+                <div class="navbar-brand">
+                    <a class="navbar-item" href="/">
+                        Kitchen Assistant
+                    </a>
+                    <span class="navbar-burger burger" data-target="navbarMenu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                </div>
+                <div id="navbarMenu" class="navbar-menu">
+                    <div class="navbar-end">
+                        <a class="navbar-item is-active" href="/pantry">
+                            Pantry
+                        </a>
+                        <a class="navbar-item" href="/menu">
+                            Menu
+                        </a>
+                        <a class="navbar-item" href="/recipes">
+                            My Recipes
+                        </a>
+                        <a class="navbar-item" href="/shoppingList">
+                            Shopping List
+                        </a>
+                        <a class="navbar-item" href="/searchRecipes">
+                            Search Recipes
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- END NAV -->
+
+        <div class="container">
+            <div class="add-pantry-item">
+                <div><p>Add a new item </p></div>
+                
+                <form action="/pantry" method="POST">
+        
+
+                    <label for="itemName">Item Name:</label>
+                    <input type="text" name="itemName" />
+            
+                    <label for="categoryName">Category Name:</label>
+                    <input type="text" name="categoryName" />
+            
+                    <input type="submit" />
+                </form>
+                       
+            </div>
+                    <div class="section">
+                    
+                        <div id="app" class="row columns is-multiline">
+                            <% for(let recipeCategory in pantry){ %>
+                                <% let pantryItemArr=pantry[recipeCategory] %>
+                                                    <div v-for="card in cardData" key="card.id" class="column is-4">
+                                                        <div class="card large">
+                                                           
+                                                            <div class="card-content">
+                                                                <div class="media">
+
+                                                                    <div class="media-content">
+
+
+                                                                        <p class="title is-4 no-padding">
+                                                                            <%= recipeCategory %>
+                                                                        </p>
+
+                                                                        <% for(let i=0; i<pantryItemArr.length;i++){ %>
+                                                                            <% let pantryItem=pantryItemArr[i] %>
+                                                                                <% let inStockString="Out of Stock" ; %>
+                                                                                    <%if(pantryItem.inStock){%>
+                                                                                        <% inStockString="In Stock" %>
+                                                                                            <% } %>
+                                                                        
+                                                                        <p class="pantry-item">
+                                                                            <span class="title is-6">
+                                                                                <%= pantryItem.itemName %>
+                                                                                <form
+                                                                                    action="/pantry/<%=pantryItem.id%>/?_method=PUT"
+                                                                                    method="POST">
+
+                                                                                    <input type="submit"
+                                                                                        value="<%=inStockString%>"
+                                                                                        id="stockButton">
+                                                                                </form>
+                                                                                <form
+                                                                                    action="/pantry/<%=pantryItem.id%>/?_method=DELETE"
+                                                                                    method="POST">
+                                                                                    <input type="submit" value="Remove">
+                                                                                </form>
+                                                                                
+                                                                            </span>
+                                                                        </p>
+                                                                        <% } %>
+                                                                    
+                                                                    </div>
+                                                                </div>
+                                                                <div class="content">
+
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <% } %>
+
+
+                        </div>
+                    </div>
+                    
+        </div>
+
+
+        <script src="../js/cardsData.js"></script>
+
+    </body>
+
+    </html>

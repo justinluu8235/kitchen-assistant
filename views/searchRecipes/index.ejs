@@ -1,14 +1,114 @@
-<form action="/searchRecipes" method="POST">
-    <label for="query">Search Recipes</label>
-    <input type="text" name="query" />
 
-    <input type="submit" />
+<!DOCTYPE html>
+<html lang="en">
 
-</form>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cards List - Bulma Templates</title>
+    <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
+    <script src="https://kit.fontawesome.com/7dc3015a44.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <link rel="stylesheet" href="../css-1/cards_searchRecipe_index.css">
+  </head>
 
-<% for(let i=0; i<recipeTitleArr.length; i++){ %> 
-<h2><%= recipeTitleArr[i] %> </h2>
-<img src=<%=imageURLArr[i]%> alt="">
-<a href="/searchRecipes/view/<%=idArr[i]%>">View Recipe</a>
-<% } %> 
-<!-- <script src="/js/searchRecipes_index.js"></script> -->
+  <body>
+
+    <!-- START NAV -->
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+            Kitchen Assistant
+          </a>
+          <span class="navbar-burger burger" data-target="navbarMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+        <div id="navbarMenu" class="navbar-menu">
+          <div class="navbar-end">
+            <a class="navbar-item is-active" href="/searchRecipes">
+              Search Recipes
+            </a>
+            <a class="navbar-item" href="/recipes">
+                My Recipes
+              </a>
+            <a class="navbar-item" href="/menu">
+              Menu
+            </a>
+            <a class="navbar-item" href="/shoppingList">
+              Shopping List
+            </a>
+            <a class="navbar-item" href="/pantry">
+              Pantry
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- END NAV -->
+
+    <div class="container">
+        
+      <div class="section">
+        <div class="columns" id="title-block">
+          <div class="column has-text-centered">
+            <h1  class="title" style="color: darkblue;">Search for Recipes</h1><br>
+          </div>
+        </div>
+
+        <form action="/searchRecipes" method="POST" id="searchRecipeInput" >      
+            <input type="text" name="query" />
+            <input type="submit" />
+        </form>
+
+        <div id="app" class="row columns is-multiline">
+            <% for(let i=0; i<recipeTitleArr.length; i++){ %> 
+          <div v-for="card in cardData" key="card.id" class="column is-4">
+            <div class="card large">
+              <div class="card-image" class="recipe-image">
+                <figure class="image is-16by9">
+                    <img src=<%=imageURLArr[i]%> alt="">
+                </figure>
+              </div>
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-content">
+                    <p class="title is-4 no-padding"><%= recipeTitleArr[i] %> </p>
+                    <p>
+                      <span class="title is-6">
+                        <a href="/searchRecipes/view/<%=idArr[i]%>">View Recipe</a></span> </p>
+                  </div>
+                </div>
+                <div class="content">
+
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <% } %> 
+        </div>
+      </div>
+    </div>
+  
+
+    <script src="../js/cardsData.js"></script>
+
+    <!-- Using Vue to populate cards to reduce redundant code
+    <script>
+      var app = new Vue({
+        el: '#app',
+        data: {
+          cardData: cardsData
+        }
+      })
+
+    </script> -->
+  </body>
+
+</html>

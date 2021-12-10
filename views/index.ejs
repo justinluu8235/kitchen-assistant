@@ -1,1 +1,222 @@
-<h2>Homepage</h2>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cards List - Bulma Templates</title>
+    <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
+    <script src="https://kit.fontawesome.com/7dc3015a44.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <link rel="stylesheet" href="../css/cards.css">
+</head>
+
+<body>
+
+
+
+    <div class="container">
+        <div class="section">
+            <div class="columns">
+                <div class="column has-text-centered">
+                    <h1 class="title" style="color: darkblue;">Welcome to the Kitchen!</h1><br>
+                </div>
+            </div>
+            <div id="app" class="row columns is-multiline">
+                <div v-for="card in cardData" key="card.id" class="column is-4">
+                    <div class="card large">
+                        <div class="card-image" class="recipe-image">
+                            <!-- <figure class="image is-16by9">
+                      <img :src="card.image" alt="Image">
+                    </figure> -->
+                        </div>
+                        <div class="card-content">
+                            <div class="media">
+
+                                <div class="media-content">
+
+
+                                    <p class="title is-4 no-padding"><a href="/menu" >My Menu</a></p>
+
+                                    <p>
+                                        <span class="title is-6">
+                                            See what Recipes has been requested for you to make on what days.
+                                            You can also use generate ingredidents to
+                                            your shopping list from here!</span>
+                                    </p>
+                                    <p>
+                                        <span class="title is-6">
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <span class="title is-6">
+                                        </span>
+                                    </p>
+
+                                </div>
+                            </div>
+                            <div class="content">
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div v-for="card in cardData" key="card.id" class="column is-4">
+                    <div class="card large">
+                        <div class="card-image" class="recipe-image">
+                            
+                        </div>
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-content">
+
+
+                                    <p class="title is-4 no-padding"><a href="/recipes" >My Recipes</a></p>
+
+                                    <p>
+                                        <span class="title is-6">
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <span class="title is-6">
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <span class="title is-6">
+                                        </span>
+                                    </p>
+
+                                </div>
+                            </div>
+                            <div class="content">
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div v-for="card in cardData" key="card.id" class="column is-4">
+                    <div class="card large">
+                        <div class="card-image" class="recipe-image">
+                        </div>
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-content">
+                                    <p class="title is-4 no-padding"><a href="/shoppingList" >My Shopping List</a></p>
+                                    <p>
+                                        <span class="title is-6">
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <span class="title is-6">
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <span class="title is-6">
+                                        </span>
+                                    </p>
+
+                                </div>
+                            </div>
+                            <div class="content">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div v-for="card in cardData" key="card.id" class="column is-4">
+                    <div class="card large">
+                        <div class="card-image" class="recipe-image">
+                        </div>
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-content">
+                                    <p class="title is-4 no-padding"><a href="/pantry" >My Pantry</a></p>
+                                    <p>
+                                        <span class="title is-6">
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <span class="title is-6">
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <span class="title is-6">
+                                        </span>
+                                    </p>
+
+                                </div>
+                            </div>
+                            <div class="content">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div v-for="card in cardData" key="card.id" class="column is-4">
+                    <div class="card large">
+                        <div class="card-image" class="recipe-image">
+                        </div>
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-content">
+                                    <p class="title is-4 no-padding"><a href="/searchRecipes" >Search Recipes</a></p>
+                                    <p>
+                                        <span class="title is-6">
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <span class="title is-6">
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <span class="title is-6">
+                                        </span>
+                                    </p>
+
+                                </div>
+                            </div>
+                            <div class="content">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div v-for="card in cardData" key="card.id" class="column is-4">
+                    <div class="card large">
+                        <div class="card-image" class="recipe-image">
+                        </div>
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-content">
+                                    <p class="title is-4 no-padding">View and Request Friend's Recipes</p>
+                                    <p>
+                                        <span class="title is-6">
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <span class="title is-6">
+                                        </span>
+                                    </p>
+                                    <p>
+                                        <span class="title is-6">
+                                        </span>
+                                    </p>
+
+                                </div>
+                            </div>
+                            <div class="content">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+</body>

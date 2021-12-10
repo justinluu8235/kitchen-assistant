@@ -1,5 +1,5 @@
 :root {
-  --bg: #071e36;
+  --bg: #c5f1ce;
   --card-bg: #041221;
 }
 
@@ -57,4 +57,12 @@ strong {
 .fa {
   color: ghostwhite;
   margin: 10px
+}
+
+.card-image{
+	border: 2px solid black;
+}
+
+a{
+  color:darkblue;
 }

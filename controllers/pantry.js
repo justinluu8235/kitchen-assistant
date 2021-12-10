@@ -6,18 +6,41 @@ const { PantryStockList, PantryCategory, ShoppingList } = require('../models');
 
 
 //View pantry items - have the option to add, delete, add note out of stock on this page
-router.get('/', isLoggedIn, function (req, res) {
+router.get('/', isLoggedIn, async function (req, res) {
+    let pantry = {};
 
-    PantryStockList.findAll()
-    .then(function(listList){
-        res.render('pantry/index', {listList});
-    })
-    .catch(function(err){
+    try{
+        let pantryList = await PantryStockList.findAll();
+        for(let i=0; i<pantryList.length; i++){
+            let pantryItem = pantryList[i].toJSON();
+            //let inStock = pantryItem.inStock;
+            let pantryCatId = pantryItem.pantryCategoryId; 
+            let pantryCategory = await PantryCategory.findByPk(pantryCatId);
+            pantryCategory = pantryCategory.toJSON();
+            let pantryCatName = pantryCategory.categoryName;
+            if(pantry[pantryCatName] == undefined){
+                pantry[pantryCatName]  = [pantryItem]
+            }
+            else{
+                pantry[pantryCatName].push(pantryItem);
+            }
+        }
+        console.log(pantry);
+        res.render('pantry/index', {pantry});
+    }
+    catch(err){
         console.log(err);
-    });
+    }
+
+
+
 
     
 });
+
+
+
+
 
 
 //Adding a pantry item

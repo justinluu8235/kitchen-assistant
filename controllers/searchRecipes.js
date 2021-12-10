@@ -20,6 +20,7 @@ router.get('/', isLoggedIn, async function (req, res) {
 router.get('/view/:id', async function (req, res) {
     let apiRecipeId = req.params.id;
     let recipeName;
+    let image;
     let ingredientsObj = {};
     ingredientsObj.ingredientNameArr = [];
     ingredientsObj.ingredientQuantityArr = [];
@@ -32,6 +33,7 @@ router.get('/view/:id', async function (req, res) {
         let response = await axios.get(`https://api.spoonacular.com/recipes/${apiRecipeId}/information?apiKey=${API_KEY}&includeNutrition=false`)
         response = response.data;
         recipeName = response.title;
+        image = response.image;
         for(let i=0; i<response.extendedIngredients.length; i++){
             let ingredient = response.extendedIngredients[i];
             ingredientsObj.ingredientNameArr.push(ingredient.name);
@@ -59,7 +61,7 @@ router.get('/view/:id', async function (req, res) {
         console.log(err);
     }
 
-    res.render('searchRecipes/show', {recipeName, instructionsObj, ingredientsObj})
+    res.render('searchRecipes/show', {image, recipeName, instructionsObj, ingredientsObj})
 
 });
 
@@ -104,6 +106,7 @@ router.post('/', async function (req, res) {
 router.post('/getRecipe', isLoggedIn, async function (req, res) {
     let userId = req.user.get().id;
     let recipeName = req.body.recipeName;
+    let imageURL = req.body.imageURL;
 
     //ingredients
     let ingredientNameArr = req.body.ingredientName;
@@ -115,7 +118,7 @@ router.post('/getRecipe', isLoggedIn, async function (req, res) {
     let stepNumberArr = req.body.stepNumber;
 
     //Create a Recipe and grab its id
-    let recipeId = await addRecipe(userId, recipeName, "New Recipe");
+    let recipeId = await addRecipe(imageURL, userId, recipeName, "New Recipe");
     for (let i = 0; i < ingredientNameArr.length; i++) {
         await addIngredients(recipeId, ingredientNameArr[i], ingredientQuantityArr[i], quantityUnitArr[i]);
     }
@@ -133,12 +136,14 @@ router.put('/searchRecipes/edit', function (req, res) {
 
 });
 
-async function addRecipe(userId, name, category) {
+async function addRecipe(image, userId, name, category) {
     let newRecipe;
     let user;
+    console.log("IMAGE URL", image);
     try {
         newRecipe = await Recipe.create({
-            recipeName: name
+            recipeName: name,
+            imageURL: image
         })
     }
     catch (err) {

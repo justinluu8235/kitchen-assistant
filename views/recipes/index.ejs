@@ -18,8 +18,8 @@
     <nav class="navbar">
       <div class="container">
         <div class="navbar-brand">
-          <a class="navbar-item" href="#">
-            <img src="https://cdn.emk.dev/templates/bulma-logo-light.png" alt="Logo">
+          <a class="navbar-item" href="/">
+            Kitchen Assistant
           </a>
           <span class="navbar-burger burger" data-target="navbarMenu">
             <span></span>
@@ -29,23 +29,20 @@
         </div>
         <div id="navbarMenu" class="navbar-menu">
           <div class="navbar-end">
-            <a class="navbar-item is-active">
-              Home
+            <a class="navbar-item is-active" href="/recipes">
+              My Recipes
             </a>
-            <a class="navbar-item">
-              Examples
+            <a class="navbar-item" href="/menu">
+              Menu
             </a>
-            <a class="navbar-item">
-              Features
+            <a class="navbar-item" href="/shoppingList">
+              Shopping List
             </a>
-            <a class="navbar-item">
-              Team
+            <a class="navbar-item" href="/pantry">
+              Pantry
             </a>
-            <a class="navbar-item">
-              Archives
-            </a>
-            <a class="navbar-item">
-              Help
+            <a class="navbar-item" href="/searchRecipes">
+              Search Recipes
             </a>
           </div>
         </div>
@@ -59,7 +56,7 @@
         <a href="/recipes/new">Add a Recipe</a>
         <div class="columns">
           <div class="column has-text-centered">
-            <h1 class="title" style="color: ghostwhite;">Bulma Card Layout Template</h1><br>
+            <h1 class="title" style="color: darkblue;">My Recipes</h1><br>
           </div>
         </div>
         <div id="app" class="row columns is-multiline">
@@ -67,18 +64,15 @@
             <% let recipe = allRecipes[i].toJSON() %>
           <div v-for="card in cardData" key="card.id" class="column is-4">
             <div class="card large">
-              <div class="card-image">
+              <div class="card-image" class="recipe-image">
                 <figure class="image is-16by9">
-                  <img :src="card.image" alt="Image">
+                  <img src="<%=recipe.imageURL%>" alt="">
                 </figure>
               </div>
+              
               <div class="card-content">
                 <div class="media">
-                  <div class="media-left">
-                    <figure class="image is-48x48">
-                      <img :src="card.avatar" alt="Image">
-                    </figure>
-                  </div>
+                 
                   <div class="media-content">
 
 
@@ -96,9 +90,9 @@
                           <span class="title is-6">
                             <form action="/menu/<%=recipe.id%>" method="POST">
                               <input type="date" name="dateSelected" />
-                              <input type="submit" />
+                              <input type="submit" value="Request"/>
                             </form> </span> </p>
-                    <p class="subtitle is-6">{{card.user.title}}</p>
+                
                   </div>
                 </div>
                 <div class="content">
@@ -113,22 +107,7 @@
         </div>
       </div>
     </div>
-    <footer class="footer">
-      <div class="container">
-        <div class="content has-text-centered">
-          <div class="soc">
-            <a href="#"><i class="fa fa-github-alt fa-lg" aria-hidden="true"></i></a>
-            <a href="#"><i class="fa fa-youtube fa-lg" aria-hidden="true"></i></a>
-            <a href="#"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a>
-            <a href="#"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a>
-          </div>
-          <p>
-            <strong>Bulma</strong> by <a href="http://jgthms.com">Jeremy Thomas</a>.
-            The source code is licensed <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. <br>
-          </p>
-        </div>
-      </div>
-    </footer>
+  
 
     <script src="../js/cardsData.js"></script>
 
