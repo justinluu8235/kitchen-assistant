@@ -1,4 +1,4 @@
-<form method="POST" action="/recipes/<%=recipe.id%>/?_method=PUT">
+<form method="POST" action="/searchRecipes/edit/?_method=PUT">
 
     <label for="recipeName">Recipe Name</label>
     <input type="text" name="recipeName" value="<%= recipe.recipeName%>" />
@@ -53,10 +53,8 @@
 
     <br /><br /><br />
     <input type="submit" />
-</form>
-    <form action="/recipes/<%=recipe.id%>/?_method=DELETE" method="POST">
-        <input type="submit" value="Remove">
-    </form>
 
+
+</form>
 
 <script src="/js/recipes_edit.js"></script>

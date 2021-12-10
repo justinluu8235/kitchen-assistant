@@ -1,0 +1,35 @@
+
+<h1>Pantry Items</h1>
+<% for(let i=0; i<listList.length; i++) {%> 
+<% let listItem = listList[i].toJSON()%> 
+<% let inStockString = "Out of Stock"; %> 
+<%if(listItem.inStock){%> 
+    <% inStockString = "In Stock" %> 
+    <% } %> 
+<%= listItem.itemName %> 
+
+<form action="/pantry/<%=listItem.id%>/?_method=PUT" method="POST">
+   
+    <input type="submit" value="<%=inStockString%>" id="stockButton">
+</form>
+
+<form action="/pantry/<%=listItem.id%>/?_method=DELETE" method="POST">
+    <input type="submit" value="Remove">
+</form>
+<br>
+<%}%> 
+
+
+<form action="/pantry" method="POST">
+    <p>Add a new item </p>
+    <label for="itemName">Item Name:</label>
+    <input type="text" name="itemName" />
+
+    <label for="categoryName">Category Name:</label>
+    <input type="text" name="categoryName" />
+
+    <input type="submit" />
+</form>
+
+
+<script src="/js/pantry_index.js"></script>

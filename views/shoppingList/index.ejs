@@ -1,0 +1,27 @@
+
+
+<h1>Shopping List Items</h1>
+<% for(let i=0; i<list.length; i++) {%> 
+<% let listItem =  list[i]%> 
+<% let listString = listItem.shoppingListItem + '   ,Quantity:' + listItem.ingredientQuantity + ' ' + listItem.quantityUnit %> 
+<%= listString %> 
+
+<form action="/shoppingList/<%=listItem.id%>/?_method=DELETE" method="POST">
+    <input type="submit" value="Remove">
+</form>
+<br>
+<% } %> 
+
+<form action="/shoppingList" method="POST">
+<p>Add a new item </p>
+<label for="shoppingListItem">Item Name:</label>
+<input type="text" name="shoppingListItem" />
+
+<label for="ingredientQuantity">Quantity:</label>
+<input type="text" name="ingredientQuantity" />
+
+<label for="quantityUnit">Unit:</label>
+<input type="text" name="quantityUnit" />
+
+<input type="submit" />
+</form>

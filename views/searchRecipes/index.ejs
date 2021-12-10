@@ -6,4 +6,9 @@
 
 </form>
 
+<% for(let i=0; i<recipeTitleArr.length; i++){ %> 
+<h2><%= recipeTitleArr[i] %> </h2>
+<img src=<%=imageURLArr[i]%> alt="">
+<a href="/searchRecipes/view/<%=idArr[i]%>">View Recipe</a>
+<% } %> 
 <!-- <script src="/js/searchRecipes_index.js"></script> -->

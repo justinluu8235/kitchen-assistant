@@ -16,26 +16,93 @@ router.get('/', function (req, res) {
   
 });
 
+{
+  results: [
+    {
+      id: 637876,
+      title: 'Chicken 65',
+      image: 'https://spoonacular.com/recipeImages/637876-312x231.jpg',
+      imageType: 'jpg'
+    },
+    {
+      id: 716342,
+      title: 'Chicken Suya',
+      image: 'https://spoonacular.com/recipeImages/716342-312x231.jpg',
+      imageType: 'jpg'
+    }
+  ],
+  offset: 0,
+  number: 2,
+  totalResults: 619
+}
+
+
 
 
 
 //Getting ingredients. Need the id from original searchRecipes
 const API_KEY = "2901de0d76fa46d1a71c015c429873f6";
-router.get('/', function (req, res) {
-    
-    const id = 716342;
-    axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`)
-        .then(function (response) {
-            console.log(response.data.extendedIngredients);
+router.get('/view/:id', async function (req, res) {
+    let apiRecipeId = req.params.id;
+    let recipeName;
+    //Grab ingredients list 
+    try{
+        response = await axios.get(`https://api.spoonacular.com/recipes/${apiRecipeId}/information?apiKey=${API_KEY}&includeNutrition=false`)
+        console.log(response.data.extendedIngredients);
+        
+    }
+    catch (err) {
+        console.log(err);
+    }
 
-            //res.render('searchRecipes/index',{data})
-        })
-        .catch(function (err) {
-            console.log(err);
-        });
 
-  
+
 });
+{
+    vegetarian: false,
+    vegan: false,
+    glutenFree: true,
+    dairyFree: true,
+    veryHealthy: false,
+    cheap: false,
+    veryPopular: false,
+    sustainable: false,
+    weightWatcherSmartPoints: 7,
+    gaps: 'no',
+    lowFodmap: false,
+    aggregateLikes: 1,
+    spoonacularScore: 39,
+    healthScore: 7,
+    creditsText: 'Foodista.com – The Cooking Encyclopedia Everyone Can Edit',
+    license: 'CC BY 3.0',
+    sourceName: 'Foodista',
+    pricePerServing: 135.58,
+    extendedIngredients: [
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object],
+      [Object], [Object]
+    ],
+    id: 634698,
+    title: 'Beef Tataki',
+    readyInMinutes: 45,
+    servings: 4,
+    sourceUrl: 'http://www.foodista.com/recipe/6R7JGFRL/beef-tataki',
+    image: 'https://spoonacular.com/recipeImages/634698-556x370.jpg',
+    imageType: 'jpg',
+    summary: 'Beef Tataki might be just the main course you are searching for. One serving contains <b>259 calories</b>, <b>18g of protein</b>, and <b>17g of fat</b>. This recipe serves 4 and costs $1.36 per serving. This recipe is liked by 1 foodies and cooks. Head to the store and pick up beef, ginger, daikon, and a few other things to make it today. To use up the lemon you could follow this main course with the <a href="https://spoonacular.com/recipes/lemon-shortbread-cookies-with-lemon-icing-a-tribute-to-aunt-roxanne-487814">Lemon Shortbread Cookies with Lemon Icing {A Tribute to Aunt Roxanne}</a> as a dessert. All things considered, we decided this recipe <b>deserves a spoonacular score of 42%</b>. This score is solid. Try <a href="https://spoonacular.com/recipes/beef-tataki-for-two-551512">Beef Tataki for Two</a>, <a href="https://spoonacular.com/recipes/beef-tataki-41576">Beef Tataki</a>, and <a href="https://spoonacular.com/recipes/beef-tataki-with-ponzu-sauce-41488">Beef Tataki With Ponzu Sauce</a> for similar recipes.',
+    cuisines: [],
+    dishTypes: [ 'lunch', 'main course', 'main dish', 'dinner' ],
+    diets: [ 'gluten free', 'dairy free' ],
+    occasions: [],
+    winePairing: {},
+    instructions: '<ol><li>For 4 people</li><li>Heat grid well. Place beef on grid and grill on all sides. When the surface turns light brown, dip in ice water for a few seconds. Dry with a cloth, wrap in Saran Wrap and place in the refrigerator.</li><li>Prepare condiments. Cut lemon into 8 wedges. Pare daikon in paper thin sheets, cutting with bottom part of knife while rotating the daikon. Roll daikon sheet and slice thinly crosswise, thus making very thin and long strips. Do the same with cucumber.</li><li>Cut beef into thin slices. Place daikon strip, cucumber and beef slices in a serving dish. Put other condiments on the side. Place scallions on beef. Pour soy sauce into small individual serving dishes and add condiments to taste. The beef is dipped lightly in the soy sauce.</li></ol>',
+    analyzedInstructions: [ [Object] ],
+    originalId: null,
+    spoonacularSourceUrl: 'https://spoonacular.com/beef-tataki-634698'
+  }
+
+
 
 //Get Instructions
 const API_KEY = "2901de0d76fa46d1a71c015c429873f6";
@@ -55,3 +122,209 @@ router.get('/', function (req, res) {
 
   
 });
+
+
+
+
+[
+  {
+    number: 1,
+    step: 'Heat the oven to 500 F.Wash and season the chicken with the Suya spice, chilli powder, seasoning cubes, salt and drizzle the oil over it.',
+    ingredients: [ [Object], [Object], [Object], [Object], [Object] ],
+    equipment: [ [Object] ]
+  },
+  {
+    number: 2,
+    step: 'Place the chicken in the oven and grill for 40 minutes. Check the chicken occasionally and flip on both sides so it can cook properly.',
+    ingredients: [ [Object] ],
+    equipment: [ [Object], [Object] ],
+    length: { number: 40, unit: 'minutes' }
+  },
+  {
+    number: 3,
+    step: 'Serve hot garnished with the onions and tomato and a bit of suya spice sprinkled over the chicken.',
+    ingredients: [ [Object], [Object], [Object] ],
+    equipment: []
+  }
+]
+
+
+
+
+
+
+
+
+
+
+[
+  {
+    id: 23572,
+    aisle: 'Frozen;Meat',
+    image: 'beef-cubes-raw.png',
+    consistency: 'solid',
+    name: 'beef',
+    nameClean: 'beef',
+    original: '3/4 pound beef, tenderloin',
+    originalString: '3/4 pound beef, tenderloin',
+    originalName: 'beef, tenderloin',
+    amount: 0.75,
+    unit: 'pound',
+    meta: [],
+    metaInformation: [],
+    measures: { us: [Object], metric: [Object] }
+  },
+  {
+    id: 11206,
+    aisle: 'Produce',
+    image: 'cucumber.jpg',
+    consistency: 'solid',
+    name: 'cucumber',
+    nameClean: 'cucumber',
+    original: '1 Japanese cucumber',
+    originalString: '1 Japanese cucumber',
+    originalName: 'Japanese cucumber',
+    amount: 1,
+    unit: '',
+    meta: [],
+    metaInformation: [],
+    measures: { us: [Object], metric: [Object] }
+  },
+  {
+    id: 11430,
+    aisle: 'Produce',
+    image: 'daikon.jpg',
+    consistency: 'solid',
+    name: 'daikon',
+    nameClean: 'daikon radish',
+    original: '7 ounces daikon (Japanese radish)',
+    originalString: '7 ounces daikon (Japanese radish)',
+    originalName: 'daikon (Japanese radish)',
+    amount: 7,
+    unit: 'ounces',
+    meta: [ '(Japanese radish)' ],
+    metaInformation: [ '(Japanese radish)' ],
+    measures: { us: [Object], metric: [Object] }
+  },
+  {
+    id: 11216,
+    aisle: 'Produce;Ethnic Foods;Spices and Seasonings',
+    image: 'ginger.png',
+    consistency: 'solid',
+    name: 'fresh ginger',
+    nameClean: 'ginger',
+    original: '2 teaspoons grated fresh ginger',
+    originalString: '2 teaspoons grated fresh ginger',
+    originalName: 'grated fresh ginger',
+    amount: 2,
+    unit: 'teaspoons',
+    meta: [ 'fresh', 'grated' ],
+    metaInformation: [ 'fresh', 'grated' ],
+    measures: { us: [Object], metric: [Object] }
+  },
+  {
+    id: 11215,
+    aisle: 'Produce',
+    image: 'garlic.png',
+    consistency: 'solid',
+    name: 'garlic',
+    nameClean: 'garlic',
+    original: '5 cloves garlic, minced',
+    originalString: '5 cloves garlic, minced',
+    originalName: 'garlic, minced',
+    amount: 5,
+    unit: 'cloves',
+    meta: [ 'minced' ],
+    metaInformation: [ 'minced' ],
+    measures: { us: [Object], metric: [Object] }
+  },
+  {
+    id: 9150,
+    aisle: 'Produce',
+    image: 'lemon.png',
+    consistency: 'solid',
+    name: 'lemon',
+    nameClean: 'lemon',
+    original: '1 lemon',
+    originalString: '1 lemon',
+    originalName: 'lemon',
+    amount: 1,
+    unit: '',
+    meta: [],
+    metaInformation: [],
+    measures: { us: [Object], metric: [Object] }
+  },
+  {
+    id: 10311111,
+    aisle: 'Ethnic Foods',
+    image: 'shiso-leaves.jpg',
+    consistency: 'solid',
+    name: 'shiso leaves',
+    nameClean: 'shiso leaves',
+    original: 'Shiso leaves',
+    originalString: 'Shiso leaves',
+    originalName: 'Shiso',
+    amount: 1,
+    unit: 'leaves',
+    meta: [],
+    metaInformation: [],
+    measures: { us: [Object], metric: [Object] }
+  },
+  {
+    id: 16124,
+    aisle: 'Ethnic Foods;Condiments',
+    image: 'soy-sauce.jpg',
+    consistency: 'liquid',
+    name: 'soy sauce',
+    nameClean: 'soy sauce',
+    original: 'Soy sauce',
+    originalString: 'Soy sauce',
+    originalName: 'Soy sauce',
+    amount: 4,
+    unit: 'servings',
+    meta: [],
+    metaInformation: [],
+    measures: { us: [Object], metric: [Object] }
+  }
+]
+
+
+
+
+
+// Return object for my show one recipeName Hummus Soup
+Ingredients {
+  ingredientNameArr: [
+    'water',
+    'olive oil',
+    'canned chickpeas',
+    'tahini',
+    'garlic',
+    'lemons',
+    'cumin',
+    'tumeric',
+    'curry powder',
+    'cinnamon',
+    'sea-salt'
+  ],
+  ingredientQuantityArr: [
+    4, 4, 3, 6, 3,
+    2, 2, 2, 4, 4,
+    1
+  ],
+  quantityUnitArr: [
+    'cups',      'tablespoons',
+    'cans',      'tablespoons',
+    'cloves',    'cups',
+    'teaspoons', 'teaspoons',
+    'teaspoons', 'teaspoons',
+    'serving'
+  ]
+}
+Instructions {
+  stepNumberArr: [ 1, 2 ],
+  instructionsArr: [
+    'Place water into a medium-sized pot. Chop up the garlic and add it to the pot, cover, and let boil for 10-15 minutes.',
+    'Add the chickpeas and tahini, along with the salt, pepper, cumin, curry, cinnamon, and tumeric and let cook for another 20 minutes. Turn off the flame and blend (either with a hand blender or regular one). Top off with various seasonings and a drizzle of tahini for a garnish.'
+  ]
+}

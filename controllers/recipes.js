@@ -2,18 +2,29 @@ const express = require('express');
 const { RowDescriptionMessage } = require('pg-protocol/dist/messages');
 const router = express.Router();
 const isLoggedIn = require('../middleware/isLoggedIn');
-const { Recipe, User, RecipeCategory, IngredientList, RecipeStep} = require('../models');
+const { Recipe, User, RecipeCategory, IngredientList, RecipeStep, ShoppingList, PantryStockList } = require('../models');
 const user = require('../models/user');
 
 
 
 router.get('/', isLoggedIn, async function (req, res) {
-   
-    try{
-        let allRecipes = await Recipe.findAll();
-        res.render('recipes/index', {allRecipes});
+    let userId = req.user.get().id;
+    let user;
+    //Find the user and add the recipe to the user
+    try {
+        user = await User.findByPk(userId);
+
     }
-    catch(err){
+    catch (err) {
+        console.log(err);
+    }
+
+
+    try {
+        let allRecipes = await user.getRecipes();
+        res.render('recipes/index', { allRecipes });
+    }
+    catch (err) {
 
     }
 });
@@ -104,7 +115,7 @@ router.get('/:id', async function (req, res) {
     }
 
     res.render('recipes/show', { recipe, recipeStepsArr, ingredientsArr });
-  
+
 
 })
 
@@ -130,6 +141,40 @@ router.post('/', isLoggedIn, async function (req, res) {
 });
 
 
+//Generate shopping list with the recipe's ingredients
+router.post('/:id', isLoggedIn, async function (req, res) {
+    let recipe;
+    let ingredientList;
+    let recipeID = Number(req.params.id);
+    //Grab the recipe
+    try {
+        recipe = await Recipe.findByPk(recipeID);
+        ingredientList = await recipe.getIngredientLists();
+        let pantryItemsArr = await PantryStockList.findAll();
+
+        let items = [];
+        for (let i = 0; i < pantryItemsArr.length; i++) {
+            let pantryItem = pantryItemsArr[i];
+            items.push(pantryItem.toJSON().itemName);
+        }
+
+        for (let i = 0; i < ingredientList.length; i++) {
+            let ingredient = ingredientList[i].toJSON();
+
+            if (!items.includes(ingredient.ingredientName)) {
+                await ShoppingList.create({
+                    shoppingListItem: ingredient.ingredientName,
+                    ingredientQuantity: ingredient.ingredientQuantity,
+                    quantityUnit: ingredient.quantityUnit
+                })
+            }
+        }
+    }
+    catch (err) {
+        console.log(err);
+    }
+
+});
 
 //Put - Save edited data of an Recipe
 router.put('/:id', async function (req, res) {
@@ -146,6 +191,22 @@ router.put('/:id', async function (req, res) {
 
 
 
+router.delete('/:id', isLoggedIn, async function (req, res) {
+    Recipe.destroy({
+        where: {
+            id: Number(req.params.id)
+        }
+    })
+        .then(function (rowsDeleted) {
+
+            res.redirect('/recipes');
+        })
+        .catch(function (error) {
+            console.log('Error', err);
+            res.render('404', { message: 'Abum was not deleted. Please try again' })
+        })
+
+});
 
 
 
@@ -357,10 +418,10 @@ async function updateIngredients(recipeID, ingredientNameArr, quantityArr, unitA
 
         //Anything extra, create a new one 
         for (let i = ingredientsArr.length; i < ingredientNameArr.length; i++) {
-            try{
-            await addIngredients(recipeID, ingredientNameArr[i], quantityArr[i], unitArr[i]);
+            try {
+                await addIngredients(recipeID, ingredientNameArr[i], quantityArr[i], unitArr[i]);
             }
-            catch(err){
+            catch (err) {
                 console.log(err)
             }
         }
@@ -399,8 +460,8 @@ async function updateRecipeSteps(recipeID, instructionsArr) {
 
     try {
         recipeStepArr = await recipe.getRecipeSteps({
-        
-            order:['stepNumber'],
+
+            order: ['stepNumber'],
         });
 
     }
@@ -464,16 +525,16 @@ async function updateRecipeSteps(recipeID, instructionsArr) {
 
         //Create the rest
         for (let i = recipeStepArr.length; i < instructionsArr.length; i++) {
-      
+
             try {
-                await addRecipeSteps(recipeID, i+1, instructionsArr[i]);
+                await addRecipeSteps(recipeID, i + 1, instructionsArr[i]);
             }
             catch (err) {
                 console.log(err);
             }
         }
     }
-    else{
+    else {
         for (let i = 0; i < instructionsArr.length; i++) {
             let instruction = recipeStepArr[i];
             let instructionID = instruction.toJSON().id;
