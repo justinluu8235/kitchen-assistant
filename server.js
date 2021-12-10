@@ -60,6 +60,11 @@ app.get('/', (req, res) => {
   res.render('index');
 })
 
+app.get('/home', (req, res) => {
+  res.render('home');
+})
+
+
 // Add this above /auth controllers
 app.get('/profile', isLoggedIn, (req, res) => {
   const { id, name, email } = req.user.get(); 

@@ -1,0 +1,19 @@
+<% for(let date in menu){ %> 
+    <% let menuItemArr = menu[date] %> 
+    <h1><%= date %> </h1>
+    
+    <% for(let i=0; i<menuItemArr.length;i++){ %> 
+        <% let recipe = menuItemArr[i] %> 
+        <%= recipe.recipeName %>
+        <a href="/recipes/<%=recipe.id%>">View Recipe</a>
+        <form action="/recipes/<%=recipe.id%>" method="POST">
+            <input type="submit" value="Add Ingredients to Shopping List" />
+          </form>
+
+          <form action="/menu/<%=recipe.menuId%>/?_method=DELETE" method="POST">
+            <input type="submit" value="Remove from Menu">
+        </form>
+    
+
+    <% } %> 
+<% } %> 

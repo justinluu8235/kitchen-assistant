@@ -1,11 +1,19 @@
 <h1>All Recipes</h1>
 <a href="/recipes/new">Add a Recipe</a>
-<% for( let i = 0; i < allRecipes.length; i++ ) { %>
-    <% let recipe = allRecipes[i].toJSON()  %> 
-    <p><%= recipe.recipeName %> </p>
-    <a href="/recipes/<%=recipe.id%>">View Recipe</a>
-    <form action="/recipes/<%=recipe.id%>" method="POST">
-        <input type="submit" value="Add Ingredients to Shopping List">
-    </form>
-    <hr>
+<% for( let i = 0; i < allRecipes.length; i++ ) { %> <% let recipe =
+allRecipes[i].toJSON() %>
+<p><%= recipe.recipeName %></p>
+<a href="/recipes/<%=recipe.id%>">View Recipe</a>
+
+<form action="/recipes/<%=recipe.id%>" method="POST">
+  <input type="submit" value="Add Ingredients to Shopping List" />
+</form>
+
+<form action="/menu/<%=recipe.id%>" method="POST">
+  <input type="date" name="dateSelected" />
+  <input type="submit" />
+</form>
+
+
+<hr />
 <% } %>
