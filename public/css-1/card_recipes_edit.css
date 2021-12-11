@@ -73,47 +73,57 @@ form, .pantry-item{
 }
 
 .add-pantry-item{
-  height:120px;
-  width: 800px;
-  margin-top:25px;
-  display:flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-  background-color:#EBF2FA;
-  border-radius:15px;
+    height:80px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
 }
 
-.new-item-text{
-  color: #0d6efd;
-  font-size: 25px;
-  font-weight: 600;
+.media-content{
+    min-height:550px;
+    width: 800px;
+    flex-direction: column;
+    align-items:flex-start;
 }
 
-.title{
-  margin-top:25px;
+#column{
+    width: 700px;
 }
 
-#category{
-  margin-top:0;
-  font-size: 35px;
-  color: #0d6efd;
+.list-item{
+    display:block;
+    /* height: 150px;
+    width: 150px;
+    background-color: yellow; */
+    margin:10px;
+    color:black;
 }
 
-.pantry-item{
-  font-size: 25px;
- 
+.new-ingredient, .first-ingredient, .new-recipe-step, .first-recipe-step{
+    border: 1px solid black;
+    margin-top:5px;
+    margin-bottom:5px;
 }
 
-input{
-  width: 120px;
+textarea, label,input{
+  margin:15px;
+  margin-left:10px;
 }
-form{
+
+
+.instruction-input{
+    height:80px;
+    width: 300px;
+   
+}
+
+.instructions{
   position:relative;
- float:right;
+  bottom:50px;
 }
-
-.remove-input{
-  width: 80px;
- 
+#addRecipeStepButton,#addIngredientButton{
+  margin-top:20px;
+  position:relative;
+  right:10px;
 }

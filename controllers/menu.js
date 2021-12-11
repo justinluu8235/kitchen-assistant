@@ -10,6 +10,7 @@ router.get('/',  async function (req, res) {
     
     try{
         let menuList = await Menu.findAll();
+        console.log(menuList);
         for(let i=0; i<menuList.length; i++){
             let menuItem = menuList[i].toJSON();
             let dateToMake = menuItem.dateToMake;
@@ -39,7 +40,8 @@ router.post('/:id',  async function (req, res) {
     try{
         await Menu.create({
             dateToMake: dateRequested,
-            recipeId: req.params.id
+            recipeId: req.params.id,
+            imageURL: req.body.imageURL
         })
         
     }

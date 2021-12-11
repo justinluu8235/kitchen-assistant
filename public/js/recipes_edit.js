@@ -34,13 +34,14 @@ addRecipeStepButton.onclick = function(){
 
     let allIngredientsDiv = document.querySelector('.all-recipe-steps');
     let clone = newRecipeStepDiv.cloneNode(true);
-    let inputArray = clone.querySelectorAll('input');
+    let textArea = clone.querySelector('textarea');
+    let input = clone.querySelector('input');
         //clear everything minus the delete button
-    for(let i=0; i<inputArray.length-1; i++){
-        let inputElement = inputArray[i];
-        inputElement.value = '';
-    }
-    let newDeleteButton = inputArray[inputArray.length - 1];
+    
+        console.log(textArea)
+        textArea.innerHTML = '';
+    
+    let newDeleteButton = input;
     deleteRecipeStepButtonArr.push(newDeleteButton);
 
     allIngredientsDiv.appendChild(clone);

@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
   };
   Menu.init({
     dateToMake: DataTypes.STRING,
-    recipeId: DataTypes.INTEGER
+    recipeId: DataTypes.INTEGER,
+    imageURL: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Menu',

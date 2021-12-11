@@ -1,50 +1,129 @@
-<form action="/searchRecipes/getRecipe"  method="POST">
 
 
-<h1>Recipe Name</h1>
-<%= recipeName %> 
-<input type="text" name="recipeName" value="<%=recipeName%>" hidden/>
-<br>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cards List - Bulma Templates</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css"
+    />
+    <script
+      src="https://kit.fontawesome.com/7dc3015a44.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <link rel="stylesheet" href="/css-1/card_recipes_show.css" />
+  </head>
 
-<img src="<%=image%>" alt="">
-<input type="text" name="imageURL" value="<%=image%>" hidden/>
+  <body>
+    <!-- START NAV -->
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/"> Kitchen Assistant </a>
+          <span class="navbar-burger burger" data-target="navbarMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+        <div id="navbarMenu" class="navbar-menu">
+          <div class="navbar-end">
+            <a class="navbar-item" href="/pantry"> Pantry </a>
+            <a class="navbar-item" href="/menu"> Menu </a>
+            <a class="navbar-item" href="/recipes"> My Recipes </a>
+            <a class="navbar-item" href="/shoppingList"> Shopping List </a>
+            <a class="navbar-item" href="/searchRecipes"> Search Recipes </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- END NAV -->
+    <form action="/searchRecipes/getRecipe"  method="POST">
+    <div class="container">
+        <div class="columns">
+            <div class="column has-text-centered">
+              <h1 class="title" style="color: #EBF2FA;"><%= recipeName %> </h1><br>
+              <img id="search-recipe-image" src="<%=image%>" alt="">
+              <input type="text" name="imageURL" value="<%=image%>" hidden/>
+                <input type="text" name="recipeName" value="<%=recipeName%>" hidden/>
+            </div>
+          </div>
+          
+            <input type="submit" value="Save to My Recipes"/>
+        <div id="app" class="row columns is-multiline">
+          <div v-for="card in cardData" key="card.id" class="column is-4" id="column" >
+            <div class="card large" id="card-large">
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-content">
+                    <p class="title is-4 no-padding">Ingredients:</p>
+                    <p>
+                        <span class="title is-6">
+                            <% for(let i=0; i<ingredientsObj.ingredientNameArr.length; i++){ %> 
+                                <% let ingredientName = ingredientsObj.ingredientNameArr[i] %> 
+                                <% let ingredientQuantity = ingredientsObj.ingredientQuantityArr[i] %> 
+                                <% let quantityUnit = ingredientsObj.quantityUnitArr[i] %> 
+                                <% let stringIngredient = ingredientName + "   Quantity: " + ingredientQuantity + " " + quantityUnit %> 
+                                <input type="text" name="ingredientName" value="<%=ingredientName%>" hidden/>
+                                <input type="text" name="ingredientQuantity" value="<%=ingredientQuantity%>" hidden/>
+                                <input type="text" name="quantityUnit" value="<%=quantityUnit%>" hidden/>
+                                <br>
+                                <%= stringIngredient %> 
+                                <% } %> 
+                        </span> 
+                    </p>
+                   
+                      
+                  </div>
+                </div>
+                <div class="content"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div id="app" class="row columns is-multiline">
+            <div v-for="card in cardData" key="card.id" class="column is-4" id="column" >
+              <div class="card large" id="card-large">
+                <div class="card-content">
+                  <div class="media">
+                    <div class="media-content">
+                      <p class="title is-4 no-padding">Instructions:</p>
+                      <p >
+                          <span class="title is-6" >
+                            <% for(let i=0; i<instructionsObj.stepNumberArr.length; i++){ %> 
+                                <% let stepNumber = instructionsObj.stepNumberArr[i] %> 
+                                <% let instructions = instructionsObj.instructionsArr[i] %> 
+                                <input type="text" name="instructions" value="<%=instructions%>" hidden/>
+                                <input type="text" name="stepNumber" value="<%=stepNumber%>" hidden/>
+                                <br>
+                                <p class="instructions">Step Number: <%= stepNumber %> </p>
+                                
+                                <p class="instructions"><%= instructions %> </p>
+                                <br>
+                                <% } %> 
+                          </span> 
+                      </p>
+                     
+                        
+                    </div>
+                  </div>
+                  <div class="content"></div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-<h2>Ingredients:</h2>
-<% for(let i=0; i<ingredientsObj.ingredientNameArr.length; i++){ %> 
-<% let ingredientName = ingredientsObj.ingredientNameArr[i] %> 
-<% let ingredientQuantity = ingredientsObj.ingredientQuantityArr[i] %> 
-<% let quantityUnit = ingredientsObj.quantityUnitArr[i] %> 
-<% let stringIngredient = ingredientName + "   Quantity: " + ingredientQuantity + " " + quantityUnit %> 
-<input type="text" name="ingredientName" value="<%=ingredientName%>" hidden/>
-<input type="text" name="ingredientQuantity" value="<%=ingredientQuantity%>" hidden/>
-<input type="text" name="quantityUnit" value="<%=quantityUnit%>" hidden/>
-<br>
-<%= stringIngredient %> 
-<% } %> 
 
 
-<h2>Instructions:</h2>
-<% for(let i=0; i<instructionsObj.stepNumberArr.length; i++){ %> 
-<% let stepNumber = instructionsObj.stepNumberArr[i] %> 
-<% let instructions = instructionsObj.instructionsArr[i] %> 
-<input type="text" name="instructions" value="<%=instructions%>" hidden/>
-<input type="text" name="stepNumber" value="<%=stepNumber%>" hidden/>
-<br>
-<p>Step Number: <%= stepNumber %> </p>
+      </div>
+    </div></form>
 
-<%= instructions %> 
-<br>
-<% } %> 
-
-
-
-
-
-
-
-
-
-
-<input type="submit" value="Save to My Recipes"/>
-
-</form>
+    <script src="../js/cardsData.js"></script>
+  </body>
+</html>

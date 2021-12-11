@@ -17,23 +17,17 @@
         <div class="section">
             <div class="columns">
                 <div class="column has-text-centered">
-                    <h1 class="title" style="color: darkblue;">Welcome to the Kitchen!</h1><br>
+                    <h1 class="title" style="color: #EBF2FA;">Welcome to the Kitchen!</h1><br>
                 </div>
             </div>
             <div id="app" class="row columns is-multiline">
                 <div v-for="card in cardData" key="card.id" class="column is-4">
                     <div class="card large">
-                        <div class="card-image" class="recipe-image">
-                            <!-- <figure class="image is-16by9">
-                      <img :src="card.image" alt="Image">
-                    </figure> -->
-                        </div>
+                
                         <div class="card-content">
                             <div class="media">
 
                                 <div class="media-content">
-
-
                                     <p class="title is-4 no-padding"><a href="/menu" >My Menu</a></p>
 
                                     <p>
@@ -64,9 +58,7 @@
                 </div>
                 <div v-for="card in cardData" key="card.id" class="column is-4">
                     <div class="card large">
-                        <div class="card-image" class="recipe-image">
-                            
-                        </div>
+                    
                         <div class="card-content">
                             <div class="media">
                                 <div class="media-content">
@@ -76,6 +68,7 @@
 
                                     <p>
                                         <span class="title is-6">
+                                            View all of your recipes! You can also generate ingredients to the shopping list from here.
                                         </span>
                                     </p>
                                     <p>
@@ -98,8 +91,7 @@
                 </div>
                 <div v-for="card in cardData" key="card.id" class="column is-4">
                     <div class="card large">
-                        <div class="card-image" class="recipe-image">
-                        </div>
+                      
                         <div class="card-content">
                             <div class="media">
                                 <div class="media-content">
@@ -110,6 +102,7 @@
                                     </p>
                                     <p>
                                         <span class="title is-6">
+                                            Manage your shopping list items here!
                                         </span>
                                     </p>
                                     <p>
@@ -127,14 +120,16 @@
 
                 <div v-for="card in cardData" key="card.id" class="column is-4">
                     <div class="card large">
-                        <div class="card-image" class="recipe-image">
-                        </div>
+                       
                         <div class="card-content">
                             <div class="media">
                                 <div class="media-content">
                                     <p class="title is-4 no-padding"><a href="/pantry" >My Pantry</a></p>
                                     <p>
                                         <span class="title is-6">
+                                            Add items that you always have in your kitchen here! When auto-adding ingredients to the 
+                                            shopping list from recipes, these items will not be added. Indicate when pantry items are out of 
+                                            stock to add to shopping list
                                         </span>
                                     </p>
                                     <p>
@@ -157,14 +152,15 @@
 
                 <div v-for="card in cardData" key="card.id" class="column is-4">
                     <div class="card large">
-                        <div class="card-image" class="recipe-image">
-                        </div>
+                       
                         <div class="card-content">
                             <div class="media">
                                 <div class="media-content">
                                     <p class="title is-4 no-padding"><a href="/searchRecipes" >Search Recipes</a></p>
                                     <p>
                                         <span class="title is-6">
+                                            Don't have recipes of your own? Search for recipes online! 
+                                            You can save them to your own recipes and edit them if you like them.
                                         </span>
                                     </p>
                                     <p>
@@ -186,14 +182,14 @@
 
                 <div v-for="card in cardData" key="card.id" class="column is-4">
                     <div class="card large">
-                        <div class="card-image" class="recipe-image">
-                        </div>
+                        
                         <div class="card-content">
                             <div class="media">
                                 <div class="media-content">
                                     <p class="title is-4 no-padding">View and Request Friend's Recipes</p>
                                     <p>
                                         <span class="title is-6">
+                                            Upcoming update...
                                         </span>
                                     </p>
                                     <p>

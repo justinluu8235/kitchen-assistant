@@ -1,4 +1,3 @@
-<script src="/js/pantry_index.js"></script>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +15,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <link rel="stylesheet" href="../css-1/card_shoppingList_index.css" />
+    <link rel="stylesheet" href="../css-1/card_recipes_new.css" />
   </head>
 
   <body>
@@ -53,7 +52,7 @@
               <div class="card-content">
                 <div class="media">
                   <div class="media-content">
-                    <p class="title is-4 no-padding">Add a Recipe</p>
+                    <p class="title is-4 no-padding" style="color:#0d6efd">Add a Recipe</p>
 
 
                           <div class="list-item">
@@ -61,32 +60,34 @@
                                 <span class="title is-6"> 
                                   <form action="/recipes" method="post">
                                     <label for="recipeName"><p>Recipe Name</p></label>
-                                    <input type="text" name="recipeName" />
-                                    <label for="categoryName"><p>Recipe Category</p></label>„
-                                    <input type="text" name="categoryName" />
+                                    <input type="text" name="recipeName" required/>
+                                    <br>
+                                    <label for="categoryName"><p>Recipe Category</p></label>
+                                    <input type="text" name="categoryName"  required/>
                                 
                                   
                                     <br />
-                                  
-                                  
+                                    <br>
                                     <div class="all-ingredients">
-                                      <p>Ingredient Name</p>
-                                      <input type="text" name="ingredientName" />
-                                  
+                                      <div class="first-ingredient">
+                                        <label for="ingredientName"><p>Ingredient Name</p></label>
+                                      <input type="text" name="ingredientName" required/>
+                                        <br>
                                       <label for="ingredientQuantity"><p>Ingredient Quantity</p></label>
-                                      <input type="text" name="ingredientQuantity" />
-                                  
+                                      <input type="text" name="ingredientQuantity" required/>
+                                        <br>
                                       <label for="quantityUnit"><p>Measurement Unit</p></label>
-                                      <input type="text" name="quantityUnit" />
-                                  
-                                      <br />
+                                      <input type="text" name="quantityUnit" required/>
+                                    </div>
+
+
                                       <div class="new-ingredient">
                                         <label for="ingredientName"><p>Ingredient Name</p></label>
                                         <input type="text" name="ingredientName" />
-                                  
+                                        <br>
                                         <label for="ingredientQuantity"><p>Ingredient Quantity</p></label>
                                         <input type="text" name="ingredientQuantity" />
-                                  
+                                        <br>
                                         <label for="quantityUnit"><p>Measurement Unit</p></label>
                                         <input type="text" name="quantityUnit" />
                                         <br />
@@ -97,14 +98,17 @@
                                   
                                   
                                     <div class="all-recipe-steps">
-                                  
-                                        <label for="instructions">Instructions</label>
-                                        <input type="text" name="instructions" />
-                                        <br>
+                                      <div class="first-recipe-step">
+                                        <label for="instructions" class="instructions">Instructions</label>
+                                        <textarea name="instructions" cols="50" rows="5" required></textarea>
+                                        <!-- <input type="text" name="instructions" class="instruction-input"/> -->
+                                      </div>
+             
                                   
                                         <div class="new-recipe-step">
-                                        <label for="instructions">Instructions</label>
-                                        <input type="text" name="instructions" />
+                                        <label for="instructions" class="instructions">Instructions</label>
+                                        <textarea name="instructions" cols="50" rows="5"></textarea>
+                                        <!-- <input type="text" name="instructions" class="instruction-input"/> -->
                                         <br>
                                         </div>
                                     </div>
@@ -135,6 +139,6 @@
       </div>
     </div>
 
-    <script src="../js/cardsData.js"></script>
+    <script src="/js/recipes_new.js"></script>
   </body>
 </html>

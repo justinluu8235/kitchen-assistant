@@ -56,13 +56,13 @@
       <div class="section">
         <div class="columns" id="title-block">
           <div class="column has-text-centered">
-            <h1  class="title" style="color: darkblue;">Search for Recipes</h1><br>
+            <h1  class="title" style="color: #EBF2FA;">Search for Recipes</h1><br>
           </div>
         </div>
 
         <form action="/searchRecipes" method="POST" id="searchRecipeInput" >      
-            <input type="text" name="query" />
-            <input type="submit" />
+            <input type="text" name="query" class="search-bar"/>
+            <input type="submit" class="search-submit" />
         </form>
 
         <div id="app" class="row columns is-multiline">
@@ -77,10 +77,11 @@
               <div class="card-content">
                 <div class="media">
                   <div class="media-content">
-                    <p class="title is-4 no-padding"><%= recipeTitleArr[i] %> </p>
-                    <p>
-                      <span class="title is-6">
-                        <a href="/searchRecipes/view/<%=idArr[i]%>">View Recipe</a></span> </p>
+                    <p class="title is-4 no-padding" id="recipe-name"><%= recipeTitleArr[i] %> </p>
+                    <br>
+                    <p >
+          
+                        <a href="/searchRecipes/view/<%=idArr[i]%>" class="view-recipe-text">View Recipe</a></p>
                   </div>
                 </div>
                 <div class="content">

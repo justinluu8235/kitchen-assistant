@@ -1,5 +1,5 @@
 :root {
-    --bg: #c5f1ce;
+    --bg: #427AA1;
     --card-bg: #041221;
   }
   
@@ -28,7 +28,7 @@
   /* Card start*/
   .card {
     overflow: hidden;
-    background: ghostwhite;
+    background: #EBF2FA;
     color: var(--bg);
   }
   
@@ -73,11 +73,15 @@ form, .pantry-item{
 }
 
 .add-pantry-item{
-    height:80px;
+    height:120px;
+    width: 800px;
+    margin-top:25px;
     display:flex;
     flex-direction: column;
     justify-content: center;
     align-content: center;
+    background-color:#EBF2FA;
+    border-radius:15px;
 }
 
 .media-content{
@@ -97,4 +101,14 @@ form, .pantry-item{
     width: 150px;
     background-color: yellow; */
     margin:10px;
+}
+
+.new-item-text{
+  color: #0d6efd;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.title{
+  margin-top:25px;
 }

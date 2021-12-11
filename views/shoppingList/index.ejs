@@ -33,7 +33,7 @@
         </div>
         <div id="navbarMenu" class="navbar-menu">
           <div class="navbar-end">
-            <a class="navbar-item is-active" href="/pantry"> Pantry </a>
+            <a class="navbar-item" href="/pantry"> Pantry </a>
             <a class="navbar-item" href="/menu"> Menu </a>
             <a class="navbar-item" href="/recipes"> My Recipes </a>
             <a class="navbar-item" href="/shoppingList"> Shopping List </a>
@@ -45,8 +45,13 @@
     <!-- END NAV -->
 
     <div class="container">
+      <div class="columns">
+        <div class="column has-text-centered">
+            <h1 class="title" style="color: #EBF2FA;">My Shopping List</h1><br>
+        </div>
+    </div>
       <div class="add-pantry-item">
-        <div><p>Add a new item</p></div>
+        <div><h1 class="new-item-text">Add a new item</h1></div>
 
         <form action="/shoppingList" method="POST">
 
@@ -69,16 +74,17 @@
               <div class="card-content">
                 <div class="media">
                   <div class="media-content">
-                    <p class="title is-4 no-padding">Shopping List Items</p>
+                    <p class="title is-4 no-padding" style="color:#0d6efd">Shopping List Items</p>
 
-                    
+                    <ul>
                         <% for(let i=0; i<list.length; i++) {%> 
                             <% let listItem =  list[i]%> 
-                            <% let listString = listItem.shoppingListItem + '   ,Quantity:' + listItem.ingredientQuantity + ' ' + listItem.quantityUnit %> 
+                            <% let listString = listItem.shoppingListItem + ', ' + listItem.ingredientQuantity + ' ' + listItem.quantityUnit %> 
                           <div class="list-item">
+                          
                             <p class="pantry-item">
                                 <span class="title is-6"> 
-                            <%= listString %> 
+                            - <%= listString %> 
                         </span>
                     </p>
 
@@ -87,7 +93,7 @@
                             </form>
                           </div>
                           <% }%> 
-                      
+                        </ul>
                   </div>
                 </div>
                 <div class="content"></div>

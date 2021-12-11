@@ -63,12 +63,17 @@
     <!-- END NAV -->
 
     <div class="container">
+      <div class="columns">
+        <div class="column has-text-centered">
+            <h1 class="title" style="color: #EBF2FA;">My Menu</h1><br>
+        </div>
+    </div>
         <% for(let date in menu){ %> 
             <% let menuItemArr = menu[date] %> 
       <div class="section">
         <div class="columns">
           <div class="column has-text-centered">
-            <h1 class="title" style="color: darkblue;"><%= date %></h1><br>
+            <h1 class="head-title" style="color: darkblue;"><%= date %></h1><br>
           </div>
         </div>
         <div id="app" class="row columns is-multiline">
@@ -76,19 +81,21 @@
                 <% let recipe = menuItemArr[i] %> 
           <div v-for="card in cardData" key="card.id" class="column is-4">
             <div class="card large">
+              <% if(recipe.imageURL != null){ %> 
               <div class="card-image" class="recipe-image">
                 <figure class="image is-16by9">
-                  <img :src="card.image" alt="Image">
+                  <img src="<%=recipe.imageURL%>" alt="">
                 </figure>
               </div>
+              <% } %> 
               <div class="card-content">
                 <div class="media">
                  
                   <div class="media-content">
 
 
-                    <p class="title is-4 no-padding"> <%= recipe.recipeName %></p>
-                   
+                    <p class="title is-4 no-padding" style="color: #0d6efd;"> <%= recipe.recipeName %></p>
+                   <br>
             
                       
                 
@@ -96,6 +103,8 @@
                       <span class="title is-6">
                         <a href="/recipes/<%=recipe.id%>">View Recipe</a> </span> </p>
                     <p>
+                      <br><br>
+                
                       <span class="title is-6"> <form action="/recipes/<%=recipe.id%>" method="POST">
                         <input type="submit" value="Add Ingredients to Shopping List" />
                       </form>

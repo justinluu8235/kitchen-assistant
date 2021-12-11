@@ -1,5 +1,5 @@
 :root {
-    --bg: #c5f1ce;
+    --bg: #427AA1;
     --card-bg: #041221;
   }
   
@@ -64,7 +64,7 @@
   }
   
   a{
-    color:darkblue;
+   color:darkblue;
   }
   
   #searchRecipeInput{
@@ -75,3 +75,20 @@
   #title-block{
       height:70px;
   }
+
+  .search-bar{
+    width: 300px;
+    height: 50px;
+    border-radius:20px;
+  }
+  .search-submit{
+  border-radius: 10px;
+}
+
+#recipe-name{
+  color:#0d6efd;
+}
+
+.view-recipe-text{
+  font-size:20px;
+}

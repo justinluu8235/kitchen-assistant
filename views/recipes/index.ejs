@@ -15,7 +15,7 @@
   <body>
 
     <!-- START NAV -->
-    <nav class="navbar">
+    <nav class="navbar" >
       <div class="container">
         <div class="navbar-brand">
           <a class="navbar-item" href="/">
@@ -27,7 +27,7 @@
             <span></span>
           </span>
         </div>
-        <div id="navbarMenu" class="navbar-menu">
+        <div id="navbarMenu" class="navbar-menu" >
           <div class="navbar-end">
             <a class="navbar-item is-active" href="/recipes">
               My Recipes
@@ -53,10 +53,12 @@
     <div class="container">
       
       <div class="section">
+        <div id="add-recipe">
         <a href="/recipes/new">Add a Recipe</a>
+      </div>
         <div class="columns">
           <div class="column has-text-centered">
-            <h1 class="title" style="color: darkblue;">My Recipes</h1><br>
+            <h1 class="title" style="color: #EBF2FA;">My Recipes</h1><br>
           </div>
         </div>
         <div id="app" class="row columns is-multiline">
@@ -64,12 +66,19 @@
             <% let recipe = allRecipes[i].toJSON() %>
           <div v-for="card in cardData" key="card.id" class="column is-4">
             <div class="card large">
+              <% if(recipe.imageURL != null){ %> 
               <div class="card-image" class="recipe-image">
                 <figure class="image is-16by9">
                   <img src="<%=recipe.imageURL%>" alt="">
                 </figure>
               </div>
-              
+              <% } else{%> 
+                <div class="card-image" class="recipe-image">
+                  <figure class="image is-16by9">
+                    <img src="https://i.imgur.com/w28imIO.png" title="source: imgur.com" />
+                  </figure>
+                </div>
+                <% } %> 
               <div class="card-content">
                 <div class="media">
                  
@@ -77,18 +86,23 @@
 
 
                     <p class="title is-4 no-padding"><%= recipe.recipeName %></p>
-                    
+                    <br>
                     <p>
                       <span class="title is-6">
                         <a href="/recipes/<%=recipe.id%>">View Recipe</a> </span> </p>
+                        <br><br>
                     <p>
                       <span class="title is-6">
                         <form action="/recipes/<%=recipe.id%>" method="POST">
                           <input type="submit" value="Add Ingredients to Shopping List" />
                         </form> </span> </p>
                         <p>
+                          <br>
                           <span class="title is-6">
                             <form action="/menu/<%=recipe.id%>" method="POST">
+                               <% if(recipe.imageURL != null){ %> 
+                                <input type="text" name="imageURL" value="<%=recipe.imageURL %>" hidden/>
+                                <% } %> 
                               <input type="date" name="dateSelected" />
                               <input type="submit" value="Request"/>
                             </form> </span> </p>

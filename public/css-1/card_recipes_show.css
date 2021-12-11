@@ -28,7 +28,7 @@
   /* Card start*/
   .card {
     overflow: hidden;
-    background: ghostwhite;
+    background: #EBF2FA;
     color: var(--bg);
   }
   
@@ -67,17 +67,53 @@
     color:darkblue;
   }
   
+form, .pantry-item{
+    display: inline;
 
-  .head-title{
-      font-size:20px;
-      text-align:left;
-      margin-bottom: 5px;
-      width: 200px;
-      background-color: #EBF2FA;
-      border-radius: 10px;
-      text-align:center;
-  }
+}
 
-  .title{
-    padding-top:20px;
-  }
+.add-pantry-item{
+    height:80px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+.media-content{
+    min-height:100px;
+    width: 800px;
+    flex-direction: column;
+    align-items:flex-start;
+}
+
+#column{
+    width: 700px;
+}
+
+.list-item{
+    display:block;
+    /* height: 150px;
+    width: 150px;
+    background-color: yellow; */
+    margin:10px;
+}
+
+.instructions{
+    color:black;
+}
+
+.title{
+  padding-top:25px;
+}
+
+input{
+  margin-bottom: 15px;
+  border-radius: 10px;
+  margin-right:20px;
+}
+
+#search-recipe-image{
+  height:250px;
+  width:250px;
+}
