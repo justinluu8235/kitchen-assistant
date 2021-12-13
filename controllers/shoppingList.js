@@ -2,13 +2,23 @@ const express = require('express');
 const { RowDescriptionMessage } = require('pg-protocol/dist/messages');
 const router = express.Router();
 const isLoggedIn = require('../middleware/isLoggedIn');
-const { ShoppingList } = require('../models');
+const { User, ShoppingList } = require('../models');
 
 
 router.get('/', isLoggedIn, async function (req, res) {
     let list;
+    let userId = req.user.get().id;
+    let user;
+    //Find the user and add the recipe to the user
+    try {
+        user = await User.findByPk(userId);
+    }
+    catch (err) {
+        console.log(err);
+    }
+
     try{
-        list = await ShoppingList.findAll();
+        list = await user.getShoppingLists();
     
     }
     catch(error){
@@ -21,12 +31,14 @@ router.get('/', isLoggedIn, async function (req, res) {
 
 
 router.post('/', isLoggedIn, async function (req, res) {
+    let myId = req.user.get().id;
     let listItem;
     try{
         listItem = await ShoppingList.create({
             shoppingListItem: req.body.shoppingListItem,
             ingredientQuantity: req.body.ingredientQuantity,
-            quantityUnit: req.body.quantityUnit
+            quantityUnit: req.body.quantityUnit,
+            userId:myId
         })
 
     }

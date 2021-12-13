@@ -1,15 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const { Menu, Recipe } = require('../models');
+const isLoggedIn = require('../middleware/isLoggedIn');
+const { User, Menu, Recipe } = require('../models');
 
 //Sorts the data on the menu by date
 //Display whats on the menu by date. 
 //Have the option to add ingredients to shopping list or view recipe
-router.get('/',  async function (req, res) {
+router.get('/', isLoggedIn,  async function (req, res) {
+    let myId = req.user.get().id;
     let menu = {};
+    let user;
     
     try{
-        let menuList = await Menu.findAll();
+        user = await User.findByPk(myId);
+        let menuList = await user.getMenus();
         console.log(menuList);
         for(let i=0; i<menuList.length; i++){
             let menuItem = menuList[i].toJSON();
@@ -41,13 +45,15 @@ res.render('menu/test' )
 });
 
 //Creates a menu item when added from the recipes list
-router.post('/:id',  async function (req, res) {
+router.post('/:id',isLoggedIn, async function (req, res) {
+    let myId = req.user.get().id;
     let dateRequested = req.body.dateSelected;
     try{
         await Menu.create({
             dateToMake: dateRequested,
             recipeId: req.params.id,
-            imageURL: req.body.imageURL
+            imageURL: req.body.imageURL,
+            userId: myId
         })
         
     }

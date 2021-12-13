@@ -2,15 +2,24 @@ const express = require('express');
 const { RowDescriptionMessage } = require('pg-protocol/dist/messages');
 const router = express.Router();
 const isLoggedIn = require('../middleware/isLoggedIn');
-const { PantryStockList, PantryCategory, ShoppingList } = require('../models');
+const { User, PantryStockList, PantryCategory, ShoppingList } = require('../models');
 
 
 //View pantry items - have the option to add, delete, add note out of stock on this page
 router.get('/', isLoggedIn, async function (req, res) {
     let pantry = {};
+    let userId = req.user.get().id;
+    let user;
+    //Find the user 
+    try {
+        user = await User.findByPk(userId);
+    }
+    catch (err) {
+        console.log(err);
+    }
 
     try{
-        let pantryList = await PantryStockList.findAll();
+        let pantryList = await user.getPantryStockLists();
         for(let i=0; i<pantryList.length; i++){
             let pantryItem = pantryList[i].toJSON();
             //let inStock = pantryItem.inStock;
@@ -44,21 +53,24 @@ router.get('/', isLoggedIn, async function (req, res) {
 
 
 //Adding a pantry item
-router.post('/', async function (req, res) {
+router.post('/', isLoggedIn, async function (req, res) {
+    let myId = req.user.get().id;
     console.log('hi');
 
     try{
 
         result = await PantryCategory.findOrCreate({
             where: {
-                categoryName: req.body.categoryName
+                categoryName: req.body.categoryName,
+            
             }
         });
         let pantryCategory = result[0];
         
         await pantryCategory.createPantryStockList({
             itemName: req.body.itemName,
-            inStock: 1
+            inStock: 1, 
+            userId:myId
         })
 
        
@@ -72,7 +84,8 @@ router.post('/', async function (req, res) {
 
 
 //Updating whether a pantry item is in stock or not. If out, add to shopping list. 
-router.put('/:id', async function (req, res) {
+router.put('/:id', isLoggedIn, async function (req, res) {
+    let myId = req.user.get().id;
     let pantryItem;
         try{
             pantryItem = await PantryStockList.findByPk(req.params.id);
@@ -90,7 +103,9 @@ router.put('/:id', async function (req, res) {
                 ShoppingList.create({
                     shoppingListItem: pantryItem.toJSON().itemName,
                     ingredientQuantity: "a lot",
-                    quantityUnit: "for the pantry"
+                    quantityUnit: "for the pantry",
+                    userId: myId
+
                 })
             }
             else{

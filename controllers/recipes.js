@@ -34,27 +34,6 @@ router.get('/new', isLoggedIn, function (req, res) {
     res.render('recipes/new');
 });
 
-//Get and display all the recipes for a different user
-router.get('/user/:id', isLoggedIn, async function (req, res) {
-    let userId = req.params.id
-    let user;
-    //Find the user and add the recipe to the user
-    try {
-        user = await User.findByPk(userId);
-    }
-    catch (err) {
-        console.log(err);
-    }
-
-
-    try {
-        let allRecipes = await user.getRecipes();
-        res.render('recipes/index', { allRecipes });
-    }
-    catch (err) {
-        console.log(err);
-    }
-});
 
 //Get Route - Edit an individual recipe. Get that recipe's info
 router.get('/edit/:id', async function (req, res) {
@@ -168,6 +147,7 @@ router.post('/', isLoggedIn, async function (req, res) {
 
 //Generate shopping list with the recipe's ingredients
 router.post('/:id', isLoggedIn, async function (req, res) {
+    let myId = req.user.get().id;
     let recipe;
     let ingredientList;
     let recipeID = Number(req.params.id);
@@ -196,7 +176,8 @@ router.post('/:id', isLoggedIn, async function (req, res) {
                 let results = await ShoppingList.findOrCreate({
                     where:{
                         shoppingListItem: ingredient.ingredientName, 
-                        quantityUnit: ingredient.quantityUnit
+                        quantityUnit: ingredient.quantityUnit,
+                        userId:myId
                     },
                     defaults:{
                         ingredientQuantity: ingredient.ingredientQuantity,
@@ -213,7 +194,8 @@ router.post('/:id', isLoggedIn, async function (req, res) {
                     },
                     {
                         where: {
-                            id:existingId
+                            id:existingId,
+                            userId:myId
                         }
                     })
                 }

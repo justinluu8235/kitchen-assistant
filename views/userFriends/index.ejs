@@ -1,7 +1,16 @@
-<form action="/userFriends" method="POST" id="searchRecipeInput">
- 
-    <input type="text" name="query" class="search-bar"/>
+<a href="/userFriends/search">Search Users</a>
 
-    <input type="submit" class="search-submit"/>
+<% if(allFriends == null){ %> 
+        <p>You currently have no friends....</p>
+    <% } else {%> 
+            <% for(let i=0; i < allFriends.length; i++){ %> 
+                    <%= allFriends[i].friendEmail %> 
+                    <form action="/userFriends/user/<%=allFriends[i].friendId%> " method="GET">
+                        <input type="submit" value="View Recipes" >
+                       </form>
 
-</form>
+                       <form action="/userFriends/<%=allFriends[i].id%>/?_method=DELETE" method="POST">
+                        <input type="submit" value="Remove Friend">
+                    </form>
+                <% } %> 
+        <% } %> 

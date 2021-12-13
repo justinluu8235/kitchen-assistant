@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.User.hasMany(models.Recipe, { foreignKey: 'userId' });
-      models.User.hasMany(models.UserFriend, {foreinKey: 'userId'})
+      models.User.hasMany(models.UserFriend, {foreignKey: 'userId'})
+      models.User.hasMany(models.Menu, {foreignKey: 'userId'})
+      models.User.hasMany(models.PantryStockList, {foreignKey: 'userId'})
+      models.User.hasMany(models.ShoppingList, {foreignKey: 'userId'})
     }
   };
   User.init({

@@ -1,0 +1,21 @@
+<form action="/userFriends" method="POST" id="searchRecipeInput">
+ 
+    <input type="text" name="query" class="search-bar"/>
+
+    <input type="submit" class="search-submit"/>
+
+</form>
+
+
+<% if(!userExists) {%> 
+    <%="This user does not exists"%> 
+    <% } else if (userExists && !userAdded) {%>
+        <p><%=`${query} Found! Currently not your friend`%> </p>
+
+        <form action="/userFriends/add/<%=userSearchedId%> " method="POST">
+             <input type="submit" value="Add Friend" >
+            </form>
+
+        <% } else {%>
+            <p><%=`${query} Found and is already your friend`%> </p>
+            <% } %>

@@ -12,12 +12,14 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.Menu.belongsTo( models.Recipe, { foreignKey: 'recipeId' } );
+      models.Menu.belongsTo( models.User, { foreignKey: 'userId' } );
     }
   };
   Menu.init({
     dateToMake: DataTypes.STRING,
     recipeId: DataTypes.INTEGER,
-    imageURL: DataTypes.STRING
+    imageURL: DataTypes.STRING,
+    userId: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Menu',

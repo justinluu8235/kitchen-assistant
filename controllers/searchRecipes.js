@@ -139,7 +139,7 @@ router.put('/searchRecipes/edit', function (req, res) {
 async function addRecipe(image, userId, name, category) {
     let newRecipe;
     let user;
-    console.log("IMAGE URL", image);
+
     try {
         newRecipe = await Recipe.create({
             recipeName: name,
