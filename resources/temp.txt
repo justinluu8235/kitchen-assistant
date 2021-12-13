@@ -1,50 +1,7 @@
-<form action="/searchRecipes/getRecipe"  method="POST">
+Find users
 
+Find their recipes 
 
-<h1>Recipe Name</h1>
-<%= recipeName %> 
-<input type="text" name="recipeName" value="<%=recipeName%>" hidden/>
-<br>
+[User: {Recipes:[]}]
 
-<img src="<%=image%>" alt="">
-<input type="text" name="imageURL" value="<%=image%>" hidden/>
-
-<h2>Ingredients:</h2>
-<% for(let i=0; i<ingredientsObj.ingredientNameArr.length; i++){ %> 
-<% let ingredientName = ingredientsObj.ingredientNameArr[i] %> 
-<% let ingredientQuantity = ingredientsObj.ingredientQuantityArr[i] %> 
-<% let quantityUnit = ingredientsObj.quantityUnitArr[i] %> 
-<% let stringIngredient = ingredientName + "   Quantity: " + ingredientQuantity + " " + quantityUnit %> 
-<input type="text" name="ingredientName" value="<%=ingredientName%>" hidden/>
-<input type="text" name="ingredientQuantity" value="<%=ingredientQuantity%>" hidden/>
-<input type="text" name="quantityUnit" value="<%=quantityUnit%>" hidden/>
-<br>
-<%= stringIngredient %> 
-<% } %> 
-
-
-<h2>Instructions:</h2>
-<% for(let i=0; i<instructionsObj.stepNumberArr.length; i++){ %> 
-<% let stepNumber = instructionsObj.stepNumberArr[i] %> 
-<% let instructions = instructionsObj.instructionsArr[i] %> 
-<input type="text" name="instructions" value="<%=instructions%>" hidden/>
-<input type="text" name="stepNumber" value="<%=stepNumber%>" hidden/>
-<br>
-<p>Step Number: <%= stepNumber %> </p>
-
-<%= instructions %> 
-<br>
-<% } %> 
-
-
-
-
-
-
-
-
-
-
-<input type="submit" value="Save to My Recipes"/>
-
-</form>
+column-friend: userId1,userId2

@@ -42,7 +42,7 @@ app.use('/menu', require('./controllers/menu'));
 app.use('/shoppingList', require('./controllers/shoppingList'));
 app.use('/pantry', require('./controllers/pantry'));
 app.use('/searchRecipes', require('./controllers/searchRecipes'));
-
+app.use('/userFriends', require('./controllers/userFriends'));
 
 
 

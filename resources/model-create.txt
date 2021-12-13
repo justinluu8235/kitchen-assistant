@@ -20,3 +20,5 @@ sequelize model:create --name PantryCategory --attributes categoryName:string;
 
 
 sequelize model:create --name PantryStockList --attributes itemName:string,inStock:boolean,pantryCategoryId:integer;
+
+sequelize model:create --name UserFriend --attributes friendEmail:string,friendId:integer,userId:integer

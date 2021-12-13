@@ -34,6 +34,12 @@ router.get('/',  async function (req, res) {
     
 });
 
+router.get('/test',  async function (req, res) {
+
+res.render('menu/test' )
+
+});
+
 //Creates a menu item when added from the recipes list
 router.post('/:id',  async function (req, res) {
     let dateRequested = req.body.dateSelected;
