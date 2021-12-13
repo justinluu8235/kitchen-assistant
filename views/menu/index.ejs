@@ -56,6 +56,9 @@
             <a class="navbar-item" href="/searchRecipes">
               Search Recipes
             </a>
+            <a class="navbar-item" href="/userFriends">
+              My Friends
+            </a>
           </div>
         </div>
       </div>
@@ -97,7 +100,10 @@
                     <p class="title is-4 no-padding" style="color: #0d6efd;"> <%= recipe.recipeName %></p>
                    <br>
             
-                      
+                   <p style="color: #0d6efd;">
+                    <span class="title is-6">
+                      Requested by: <%= recipe.requestorEmail %>  </span> </p>
+                  <p>
                 
                     <p>
                       <span class="title is-6">

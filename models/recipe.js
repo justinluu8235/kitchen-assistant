@@ -16,7 +16,6 @@ module.exports = (sequelize, DataTypes) => {
       models.Recipe.hasMany(models.IngredientList, { foreignKey: 'recipeId' });
       models.Recipe.hasMany(models.RecipeStep, { foreignKey: 'recipeId' });
       models.Recipe.hasMany(models.Menu, { foreignKey: 'recipeId' });
-   
     }
   };
   Recipe.init({

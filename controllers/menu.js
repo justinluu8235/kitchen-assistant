@@ -17,11 +17,15 @@ router.get('/', isLoggedIn,  async function (req, res) {
         console.log(menuList);
         for(let i=0; i<menuList.length; i++){
             let menuItem = menuList[i].toJSON();
+            let requestorId = menuItem.requestUserId;
             let dateToMake = menuItem.dateToMake;
             let recipeId = menuItem.recipeId; 
             let recipe = await Recipe.findByPk(recipeId);
             recipe = recipe.toJSON();
+            let requestor = await User.findByPk(requestorId);
+            let requestorEmail = requestor.toJSON().email;
             recipe.menuId = menuItem.id;
+            recipe.requestorEmail = requestorEmail;
             if(menu[dateToMake] == undefined){
                 menu[dateToMake]  = [recipe]
             }
@@ -29,7 +33,7 @@ router.get('/', isLoggedIn,  async function (req, res) {
                 menu[dateToMake].push(recipe);
             }
         }
-        console.log(menu);
+      
         res.render('menu/index', {menu});
     }
     catch(err){
@@ -48,14 +52,16 @@ res.render('menu/test' )
 router.post('/:id',isLoggedIn, async function (req, res) {
     let myId = req.user.get().id;
     let dateRequested = req.body.dateSelected;
+    console.log(myId);
     try{
         await Menu.create({
             dateToMake: dateRequested,
             recipeId: req.params.id,
             imageURL: req.body.imageURL,
-            userId: myId
+            userId: myId, 
+            requestUserId: myId
         })
-        
+        res.redirect('/recipes')
     }
     catch(err){
         console.log(err);

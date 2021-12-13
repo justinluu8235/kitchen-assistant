@@ -6,7 +6,7 @@ const { Recipe, Menu,  User, RecipeCategory, IngredientList, RecipeStep, Shoppin
 const user = require('../models/user');
 
 
-
+//Finds the user currently loggedin and gets their recipes
 router.get('/', isLoggedIn, async function (req, res) {
     let userId = req.user.get().id;
     let user;
@@ -17,7 +17,6 @@ router.get('/', isLoggedIn, async function (req, res) {
     catch (err) {
         console.log(err);
     }
-
 
     try {
         let allRecipes = await user.getRecipes();
@@ -127,7 +126,7 @@ router.get('/:id', async function (req, res) {
 
 
 
-//Take in recipe name and create a recipe 
+//Take in recipe name, ingredients, instructions and create a recipe 
 router.post('/', isLoggedIn, async function (req, res) {
     let userId = req.user.get().id;
 
@@ -153,16 +152,21 @@ router.post('/:id', isLoggedIn, async function (req, res) {
     let recipeID = Number(req.params.id);
     //Grab the recipe
     try {
+     
         recipe = await Recipe.findByPk(recipeID);
         ingredientList = await recipe.getIngredientLists();
-        let pantryItemsArr = await PantryStockList.findAll();
+        let pantryItemsArr = await PantryStockList.findAll({
+            where: {
+                userId:myId
+            }
+        });
         //Gather pantry items
         let items = [];
         for (let i = 0; i < pantryItemsArr.length; i++) {
             let pantryItem = pantryItemsArr[i];
             items.push(pantryItem.toJSON().itemName);
         }
-
+        console.log(ingredientList);
         for (let i = 0; i < ingredientList.length; i++) {
             let ingredient = ingredientList[i].toJSON();
             //Create shopping list item only if not in pantry
@@ -183,7 +187,7 @@ router.post('/:id', isLoggedIn, async function (req, res) {
                         ingredientQuantity: ingredient.ingredientQuantity,
                     }
                 })
-
+                console.log(results);
                 if(!results[1]){
                     let existingShoppingListItem = results[0];
                     existingShoppingListItem = existingShoppingListItem.toJSON();
@@ -205,6 +209,7 @@ router.post('/:id', isLoggedIn, async function (req, res) {
 
             }
         }
+        res.redirect('/recipes')
     }
     catch (err) {
         console.log(err);

@@ -16,7 +16,7 @@ router.get('/', isLoggedIn, async function (req, res) {
 });
 
 
-
+//View an individual recipe from the API
 router.get('/view/:id', async function (req, res) {
     let apiRecipeId = req.params.id;
     let recipeName;
@@ -67,16 +67,19 @@ router.get('/view/:id', async function (req, res) {
 
 
 //page to search recipes. Displays previous queried recipes
-router.get('/:query', async function (req, res) {
+router.get('/:query', isLoggedIn, async function (req, res) {
     let query = req.params.query;
     let response;
-    let queryResultsQuantity = 2;
-    let recipeTitleArr = new Array(queryResultsQuantity);
-    let idArr = new Array(queryResultsQuantity);
-    let imageURLArr = new Array(queryResultsQuantity);
+    let queryResultsQuantity = 20;
+    let recipeTitleArr;
+    let idArr;
+    let imageURLArr;
     try{
         response = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?query=${query}&apiKey=${API_KEY}&number=${queryResultsQuantity}`)
         response = response.data.results; //array
+        recipeTitleArr = new Array(response.length);
+        idArr = new Array(response.length);
+        imageURLArr = new Array(response.length);
         for(let i=0; i<response.length; i++){
             recipeTitleArr[i] = response[i].title;
             idArr[i] = response[i].id;

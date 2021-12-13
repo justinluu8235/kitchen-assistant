@@ -5,6 +5,7 @@ const isLoggedIn = require('../middleware/isLoggedIn');
 const { User, ShoppingList } = require('../models');
 
 
+//Display shopping list
 router.get('/', isLoggedIn, async function (req, res) {
     let list;
     let userId = req.user.get().id;
@@ -30,6 +31,7 @@ router.get('/', isLoggedIn, async function (req, res) {
 });
 
 
+//Create a shopping list item based on user input
 router.post('/', isLoggedIn, async function (req, res) {
     let myId = req.user.get().id;
     let listItem;

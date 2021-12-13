@@ -1,7 +1,97 @@
-<form action="/userFriends" method="POST" id="searchRecipeInput">
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cards List - Bulma Templates</title>
+    <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
+    <script src="https://kit.fontawesome.com/7dc3015a44.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <link rel="stylesheet" href="../css-1/cards_searchRecipe_index.css">
+  </head>
+
+  <body>
+
+    <!-- START NAV -->
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+            Kitchen Assistant
+          </a>
+          <span class="navbar-burger burger" data-target="navbarMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+        <div id="navbarMenu" class="navbar-menu">
+          <div class="navbar-end">
+            <a class="navbar-item is-active" href="/searchRecipes">
+              Search Recipes
+            </a>
+            <a class="navbar-item" href="/recipes">
+                My Recipes
+              </a>
+            <a class="navbar-item" href="/menu">
+              Menu
+            </a>
+            <a class="navbar-item" href="/shoppingList">
+              Shopping List
+            </a>
+            <a class="navbar-item" href="/pantry">
+              Pantry
+            </a>
+            <a class="navbar-item" href="/userFriends">
+              My Friends
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- END NAV -->
+
+    <div class="container">
+        
+      <div class="section">
+        <div class="columns" id="title-block">
+          <div class="column has-text-centered">
+            <h1  class="title" style="color: #EBF2FA;">Search for Friends by Email</h1><br>
+          </div>
+        </div>
+        <form action="/userFriends" method="POST" id="searchRecipeInput">
  
-    <input type="text" name="query" class="search-bar"/>
+            <input type="text" name="query" class="search-bar"/>
+        
+            <input type="submit" class="search-submit"/>
+        
+        </form>
 
-    <input type="submit" class="search-submit"/>
 
-</form>
+     
+        </div>
+      </div>
+    </div>
+  
+
+    <script src="../js/cardsData.js"></script>
+
+    <!-- Using Vue to populate cards to reduce redundant code
+    <script>
+      var app = new Vue({
+        el: '#app',
+        data: {
+          cardData: cardsData
+        }
+      })
+
+    </script> -->
+  </body>
+
+</html>

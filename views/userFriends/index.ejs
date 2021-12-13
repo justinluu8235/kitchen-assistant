@@ -1,10 +1,87 @@
-<a href="/userFriends/search">Search Users</a>
+<script src="/js/pantry_index.js"></script>
 
-<% if(allFriends == null){ %> 
-        <p>You currently have no friends....</p>
-    <% } else {%> 
-            <% for(let i=0; i < allFriends.length; i++){ %> 
-                    <%= allFriends[i].friendEmail %> 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cards List - Bulma Templates</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css"
+    />
+    <script
+      src="https://kit.fontawesome.com/7dc3015a44.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <link rel="stylesheet" href="../css-1/card_shoppingList_index.css" />
+  </head>
+
+  <body>
+    <!-- START NAV -->
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/"> Kitchen Assistant </a>
+          <span class="navbar-burger burger" data-target="navbarMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+        <div id="navbarMenu" class="navbar-menu">
+          <div class="navbar-end">
+            <a class="navbar-item" href="/pantry"> Pantry </a>
+            <a class="navbar-item" href="/menu"> Menu </a>
+            <a class="navbar-item" href="/recipes"> My Recipes </a>
+            <a class="navbar-item" href="/shoppingList"> Shopping List </a>
+            <a class="navbar-item" href="/searchRecipes"> Search Recipes </a>
+            <a class="navbar-item" href="/userFriends">
+              My Friends
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- END NAV -->
+
+    <div class="container">
+      <div class="columns">
+        <div class="column has-text-centered">
+            <h1 class="title" style="color: #EBF2FA;">My Friends</h1><br>
+        </div>
+    </div>
+      <div class="add-pantry-item">
+        <div><h1 class="new-item-text"><a href="/userFriends/search">Search Users</a></h1></div>
+
+        
+      </div>
+      <div class="section">
+        <div id="app" class="row columns is-multiline">
+          <div v-for="card in cardData" key="card.id" class="column is-4" id="column" >
+            <div class="card large" id="card-large">
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-content">
+                    <p class="title is-4 no-padding" style="color:#0d6efd">
+                        <% if(allFriends == null){ %> 
+                            You currently have no friends....
+                        <% } else {%> 
+                            Friend List: </p>
+                            
+                    <ul>
+                        <% for(let i=0; i < allFriends.length; i++){ %> 
+                            
+                          <div class="list-item">
+                          
+                            <p class="pantry-item">
+                                <span class="title is-6"> 
+                            -  <%= allFriends[i].friendEmail %> 
+                        </span>
+                    </p>
+
                     <form action="/userFriends/user/<%=allFriends[i].friendId%> " method="GET">
                         <input type="submit" value="View Recipes" >
                        </form>
@@ -12,5 +89,20 @@
                        <form action="/userFriends/<%=allFriends[i].id%>/?_method=DELETE" method="POST">
                         <input type="submit" value="Remove Friend">
                     </form>
-                <% } %> 
-        <% } %> 
+                          </div>
+                          <% }%> 
+                          <% } %> 
+                        </ul>
+                  </div>
+                </div>
+                <div class="content"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/cardsData.js"></script>
+  </body>
+</html>

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
     <script src="https://kit.fontawesome.com/7dc3015a44.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <link rel="stylesheet" href="../css/cards.css">
+    <link rel="stylesheet" href="../../css/cards.css">
   </head>
 
   <body>
@@ -44,6 +44,9 @@
             <a class="navbar-item" href="/searchRecipes">
               Search Recipes
             </a>
+            <a class="navbar-item" href="/userFriends">
+              My Friends
+            </a>
           </div>
         </div>
       </div>
@@ -53,12 +56,10 @@
     <div class="container">
       
       <div class="section">
-        <div id="add-recipe">
-        <a href="/recipes/new">Add a Recipe</a>
-      </div>
+       
         <div class="columns">
           <div class="column has-text-centered">
-            <h1 class="title" style="color: #EBF2FA;">My Recipes</h1><br>
+            <h1 class="title" style="color: #EBF2FA;"><%= userEmail %>'s  Recipes</h1><br>
           </div>
         </div>
         <div id="app" class="row columns is-multiline">
@@ -89,17 +90,13 @@
                     <br>
                     <p>
                       <span class="title is-6">
-                        <a href="/recipes/<%=recipe.id%>">View Recipe</a> </span> </p>
+                        <a href="/userFriends/user/recipe/<%=recipe.id%>">View Recipe</a> </span> </p>
                         <br><br>
-                    <p>
-                      <span class="title is-6">
-                        <form action="/recipes/<%=recipe.id%>" method="POST">
-                          <input type="submit" value="Add Ingredients to Shopping List" />
-                        </form> </span> </p>
+                
                         <p>
                           <br>
                           <span class="title is-6">
-                            <form action="/menu/<%=recipe.id%>" method="POST">
+                            <form action="/userFriends/<%=recipe.id%>" method="POST">
                                <% if(recipe.imageURL != null){ %> 
                                 <input type="text" name="imageURL" value="<%=recipe.imageURL %>" hidden/>
                                 <% } %> 

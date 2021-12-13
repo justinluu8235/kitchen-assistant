@@ -1,7 +1,0 @@
-Find users
-
-Find their recipes 
-
-[User: {Recipes:[]}]
-
-column-friend: userId1,userId2
