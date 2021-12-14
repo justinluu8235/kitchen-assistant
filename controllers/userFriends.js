@@ -8,7 +8,6 @@ const { Menu, Recipe, UserFriend, User, IngredientList, RecipeStep } = require('
 router.get('/',  isLoggedIn, async function (req, res) {
     //Get and show all your friends 
     let userId = req.user.get().id;
-    console.log(userId);
     let user;
     //Find the user 
     try {
@@ -22,7 +21,6 @@ router.get('/',  isLoggedIn, async function (req, res) {
         let allFriends = await user.getUserFriends();
         //See all your friends, with a button to view all their recipes. View recipes route them to get 'recipes/user:id' 
         //Button to search friends bringing you to '/search'
-        console.log(allFriends);
         res.render('userFriends/index' , {allFriends});
     }
     catch (err) {
@@ -176,13 +174,14 @@ router.post('/add/:id',  isLoggedIn, async function (req, res) {
 router.post('/save/:id',  isLoggedIn, async function (req, res) {
     let recipeID = req.params.id;
     let myId = req.user.get().id;
+    let newRecipe;
     
     try{
         let recipe = await Recipe.findByPk(recipeID);
         let ingredients = recipe.getIngredientLists();
         let recipeSteps = recipe.getRecipeSteps();
         recipe = recipe.toJSON();
-        let newRecipe = await Recipe.create({
+        newRecipe = await Recipe.create({
             recipeName: recipe.recipeName,
             numSteps: recipe.numSteps,
             recipeCategoryId: 1,
@@ -212,6 +211,8 @@ router.post('/save/:id',  isLoggedIn, async function (req, res) {
     catch(err){
         console.log(err)
     }
+    let newRecipeId = newRecipe.toJSON().id;
+    res.redirect(`/recipes/${newRecipeId}`)
 });
 
 //Create a menu request to that friend. 
