@@ -270,7 +270,7 @@ router.delete('/:id', isLoggedIn, async function (req, res) {
 async function addRecipe(userId, name, category) {
     let newRecipe;
     let user;
-    console.log(name);
+    console.log("==========", name);
     try {
         newRecipe = await Recipe.create({
             recipeName: name
@@ -279,7 +279,7 @@ async function addRecipe(userId, name, category) {
     catch (err) {
         console.log(err);
     }
-
+    console.log("==========", newRecipe);
     //Find the user and add the recipe to the user
     try {
         user = await User.findByPk(userId);
