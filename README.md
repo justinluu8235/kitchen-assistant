@@ -214,3 +214,9 @@ router.post('/', isLoggedIn, async function (req, res) {
     res.redirect(`recipes/${recipeId}`);
 });
 ``` 
+
+
+### Future Development 
+- database for all ingredients for consistent data management 
+- mobile development 
+- Cloudinary for photo uploading 
