@@ -185,7 +185,7 @@ router.post('/save/:id',  isLoggedIn, async function (req, res) {
         let newRecipe = await Recipe.create({
             recipeName: recipe.recipeName,
             numSteps: recipe.numSteps,
-            recipeCategoryId: recipe.recipeCategoryId,
+            recipeCategoryId: 1,
             userId: myId,
             imageURL: recipe.imageURL
         })
