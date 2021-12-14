@@ -49,3 +49,7 @@ p.subtitle {
 .fa{
   margin-left: 5px; 
 }
+img{
+  height: 120px;
+  width:120px;
+}
