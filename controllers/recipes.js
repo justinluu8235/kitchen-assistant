@@ -270,39 +270,42 @@ router.delete('/:id', isLoggedIn, async function (req, res) {
 async function addRecipe(userId, name, category) {
     let newRecipe;
     let user;
-    console.log("==========", name);
+    // console.log("==========", name);
+    // try {
+    //     newRecipe = await Recipe.create({
+    //         recipeName: name
+    //     })
+    // }
+    // catch (err) {
+    //     console.log(err);
+    // }
+   
+    //Find the user and add the recipe to the user
     try {
-        newRecipe = await Recipe.create({
-            recipeName: name
+        user = await User.findByPk(userId);
+        newRecipe = await user.createRecipe({
+            recipeName: name,
+            recipeCategoryId:1
         })
     }
     catch (err) {
         console.log(err);
     }
     console.log("==========", newRecipe);
-    //Find the user and add the recipe to the user
-    try {
-        user = await User.findByPk(userId);
-        user.addRecipe(newRecipe);
-        user.save();
-    }
-    catch (err) {
-        console.log(err);
-    }
     //Find or Create the Recipe Category and add the recipe to it
-    try {
-        result = await RecipeCategory.findOrCreate({
-            where: {
-                categoryName: category
-            }
-        });
-        let recipeCategory = result[0];
-        recipeCategory.addRecipe(newRecipe);
-        recipeCategory.save();
-    }
-    catch (err) {
-        console.log(err);
-    }
+    // try {
+    //     result = await RecipeCategory.findOrCreate({
+    //         where: {
+    //             categoryName: category
+    //         }
+    //     });
+    //     let recipeCategory = result[0];
+    //     recipeCategory.addRecipe(newRecipe);
+    //     recipeCategory.save();
+    // }
+    // catch (err) {
+    //     console.log(err);
+    // }
 
 
     return await newRecipe.toJSON().id;
