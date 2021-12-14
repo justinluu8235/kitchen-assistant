@@ -2,9 +2,9 @@
 
 A special someone to help you efficiently manage your kitchen so you can spend more time on the important things. Create your own recipes, find new ones, see what's on the menu for the day or week, and automatically generate your shopping lists!
 
-[Kitchen-Assistant via Heroku](https://poke-track.herokuapp.com/)
+[Kitchen-Assistant via Heroku](https://kitchen-assistant-1025.herokuapp.com/)
 
-[Kitchen-Assistant Github Repository](https://github.com/evan-woodworth/Pokedex)
+[Kitchen-Assistant Github Repository](https://github.com/justinluu8235/kitchen-assistant)
 
 ![Home Page Screen Shot](./img/home-page.png)
 
@@ -18,7 +18,7 @@ A special someone to help you efficiently manage your kitchen so you can spend m
 
 2. What's on the Menu page
 - When i view the page, I want to see a breakout of each day of the week 
-- In each day of the week, I want to see a date, and what recipes I will be making that day
+- I want to see a date, and what recipes I will be making that day
 - Next to each day, or week, I want a option to take those recipes, and generate a shopping list
 
 3. Shopping List

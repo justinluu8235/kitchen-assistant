@@ -71,7 +71,7 @@
                                 <% let ingredientName = ingredientsObj.ingredientNameArr[i] %> 
                                 <% let ingredientQuantity = ingredientsObj.ingredientQuantityArr[i] %> 
                                 <% let quantityUnit = ingredientsObj.quantityUnitArr[i] %> 
-                                <% let stringIngredient = ingredientName + "   Quantity: " + ingredientQuantity + " " + quantityUnit %> 
+                                <% let stringIngredient = ingredientName + " - " + ingredientQuantity + " " + quantityUnit %> 
                                 <input type="text" name="ingredientName" value="<%=ingredientName%>" hidden/>
                                 <input type="text" name="ingredientQuantity" value="<%=ingredientQuantity%>" hidden/>
                                 <input type="text" name="quantityUnit" value="<%=quantityUnit%>" hidden/>

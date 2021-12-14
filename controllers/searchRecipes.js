@@ -33,6 +33,7 @@ router.get('/view/:id', async function (req, res) {
         let response = await axios.get(`https://api.spoonacular.com/recipes/${apiRecipeId}/information?apiKey=${API_KEY}&includeNutrition=false`)
         response = response.data;
         recipeName = response.title;
+        console.log(response)
         image = response.image;
         for(let i=0; i<response.extendedIngredients.length; i++){
             let ingredient = response.extendedIngredients[i];
@@ -60,7 +61,7 @@ router.get('/view/:id', async function (req, res) {
     catch (err) {
         console.log(err);
     }
-
+    console.log(image);
     res.render('searchRecipes/show', {image, recipeName, instructionsObj, ingredientsObj})
 
 });
