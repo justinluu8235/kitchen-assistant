@@ -16,25 +16,30 @@ A special someone to help you efficiently manage your kitchen so you can spend m
 - I want to delete a recipe
 - I want to edit a recipe
 
-2. What's on the Menu page
+2. Search Recipes 
+- I want to search recipes from Spoonacular API
+- I want to take recipes found and add them to my recipes.
+
+3. What's on the Menu page
 - When i view the page, I want to see a breakout of each day of the week 
 - I want to see a date, and what recipes I will be making that day
 - Next to each day, or week, I want a option to take those recipes, and generate a shopping list
 
-3. Shopping List
+4. Shopping List
 - I want to see a list of items to buy, along with quantity
 - I want the option to add, delete, or edit items
 
 
-4. Pantry Manager
+5. Pantry Manager
 - I want to see a list of items that I always have in my pantry 
 - I want to perform CRUD operations on these
 - I want to have these items excluded from my shopping list when I generate shopping list bassed on recipes
 
-
-5. Search Recipes 
-- I want to search recipes from Spoonacular API
-- I want to take recipes found and add them to my recipes.
+6. Friends
+- I want to be able to add friends
+- I want to be able to view their recipes 
+- I want to be able to save their recipes into my recipes
+- I want to be able to request them to make their recipes
 
 
 ---
