@@ -178,8 +178,8 @@ router.post('/save/:id',  isLoggedIn, async function (req, res) {
     
     try{
         let recipe = await Recipe.findByPk(recipeID);
-        let ingredients = recipe.getIngredientLists();
-        let recipeSteps = recipe.getRecipeSteps();
+        let ingredients = await recipe.getIngredientLists();
+        let recipeSteps = await recipe.getRecipeSteps();
         recipe = recipe.toJSON();
         newRecipe = await Recipe.create({
             recipeName: recipe.recipeName,
@@ -188,7 +188,7 @@ router.post('/save/:id',  isLoggedIn, async function (req, res) {
             userId: myId,
             imageURL: recipe.imageURL
         })
-
+     
         for(let i=0; i<ingredients.length; i++){
             let ingredient = ingredients[i].toJSON();
             await newRecipe.createIngredientList({
@@ -197,20 +197,23 @@ router.post('/save/:id',  isLoggedIn, async function (req, res) {
                 quantityUnit: ingredient.quantityUnit, 
             })
         }
+
         for(let i=0; i<recipeSteps.length; i++){
-            let recipeStep = ingredients[i].toJSON();
-            await newRecipe.createRecipeStep({
+            let recipeStep = recipeSteps[i].toJSON();
+            let newRecipeStep = await newRecipe.createRecipeStep({
                 stepNumber: recipeStep.stepNumber, 
                 instructions: recipeStep.instructions, 
                 imageURL: recipeStep.imageURL
 
             })
+           
         }
 
     }
     catch(err){
         console.log(err)
     }
+
     let newRecipeId = newRecipe.toJSON().id;
     res.redirect(`/recipes/${newRecipeId}`)
 });
