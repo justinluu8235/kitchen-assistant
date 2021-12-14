@@ -22,11 +22,10 @@ addRecipeStepButton.onclick = function(){
     let newRecipeStepDiv = document.querySelector('.new-recipe-step');
     let allIngredientsDiv = document.querySelector('.all-recipe-steps');
     let clone = newRecipeStepDiv.cloneNode(true);
-    let inputArray = clone.querySelectorAll('input');
-    for(let i=0; i<inputArray.length; i++){
-        let inputElement = inputArray[i];
-        inputElement.value = '';
-    }
+
+    let textArea = clone.querySelector('textarea');
+    textArea.value = '';
+    console.log(clone);
     allIngredientsDiv.appendChild(clone);
 }
 

@@ -18,7 +18,15 @@ module.exports = (sequelize, DataTypes) => {
     shoppingListItem: DataTypes.STRING,
     ingredientQuantity: DataTypes.INTEGER,
     quantityUnit: DataTypes.STRING,
-    userId: DataTypes.INTEGER,
+    userId:  {
+      type: DataTypes.INTEGER,
+      allowNull:false,
+      validate:{
+        notEmpty:{
+          msg: "user ID can not be empty"
+        }
+      }
+    },
   }, {
     sequelize,
     modelName: 'ShoppingList',

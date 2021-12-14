@@ -15,10 +15,26 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   IngredientList.init({
-    ingredientName: DataTypes.STRING,
+    ingredientName: {
+      type: DataTypes.STRING,
+      allowNull:false,
+      validate:{
+        notEmpty:{
+          msg: "Ingredient Name can not be empty"
+        }
+      }
+    },
     ingredientQuantity: DataTypes.STRING,
     quantityUnit: DataTypes.STRING,
-    recipeId: DataTypes.INTEGER
+    recipeId: {
+      type: DataTypes.INTEGER,
+      allowNull:false,
+      validate:{
+        notEmpty:{
+          msg: "recipe ID can not be empty"
+        }
+      }
+    },
   }, {
     sequelize,
     modelName: 'IngredientList',

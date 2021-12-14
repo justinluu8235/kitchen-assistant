@@ -19,10 +19,20 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Recipe.init({
-    recipeName: DataTypes.STRING,
+    recipeName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "a recipe name needs to be entered"
+        }
+      }
+    },
     numSteps: DataTypes.INTEGER,
     recipeCategoryId: DataTypes.INTEGER,
-    userId: DataTypes.INTEGER,
+    userId:  {
+      type: DataTypes.INTEGER,
+    },
     imageURL: DataTypes.STRING
   }, {
     sequelize,

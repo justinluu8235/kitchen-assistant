@@ -11,15 +11,39 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.Menu.belongsTo( models.Recipe, { foreignKey: 'recipeId' } );
-      models.Menu.belongsTo( models.User, { foreignKey: 'userId' } );
+      models.Menu.belongsTo(models.Recipe, { foreignKey: 'recipeId' });
+      models.Menu.belongsTo(models.User, { foreignKey: 'userId' });
     }
   };
   Menu.init({
-    dateToMake: DataTypes.STRING,
-    recipeId: DataTypes.INTEGER,
+    dateToMake: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isDate: {
+          msg: "a date needs to be entered for this request"
+        }
+      }
+    },
+    recipeId: {
+      type: DataTypes.INTEGER,
+      allowNull:false,
+      validate:{
+        notEmpty:{
+          msg: "recipe ID can not be empty"
+        }
+      }
+    },
     imageURL: DataTypes.STRING,
-    userId: DataTypes.INTEGER,
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull:false,
+      validate:{
+        notEmpty:{
+          msg: "user ID can not be empty"
+        }
+      }
+    },
     requestUserId: DataTypes.INTEGER
   }, {
     sequelize,

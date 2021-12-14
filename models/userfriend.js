@@ -16,8 +16,24 @@ module.exports = (sequelize, DataTypes) => {
   };
   UserFriend.init({
     friendEmail: DataTypes.STRING,
-    friendId: DataTypes.INTEGER,
-    userId: DataTypes.INTEGER
+    friendId:  {
+      type: DataTypes.INTEGER,
+      allowNull:false,
+      validate:{
+        notEmpty:{
+          msg: "friend ID can not be empty"
+        }
+      }
+    },
+    userId:  {
+      type: DataTypes.INTEGER,
+      allowNull:false,
+      validate:{
+        notEmpty:{
+          msg: "user ID can not be empty"
+        }
+      }
+    },
   }, {
     sequelize,
     modelName: 'UserFriend',

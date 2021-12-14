@@ -36,9 +36,7 @@ addRecipeStepButton.onclick = function(){
     let clone = newRecipeStepDiv.cloneNode(true);
     let textArea = clone.querySelector('textarea');
     let input = clone.querySelector('input');
-        //clear everything minus the delete button
-    
-        console.log(textArea)
+
         textArea.innerHTML = '';
     
     let newDeleteButton = input;

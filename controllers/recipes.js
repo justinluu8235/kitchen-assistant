@@ -270,6 +270,7 @@ router.delete('/:id', isLoggedIn, async function (req, res) {
 async function addRecipe(userId, name, category) {
     let newRecipe;
     let user;
+    console.log(name);
     try {
         newRecipe = await Recipe.create({
             recipeName: name
