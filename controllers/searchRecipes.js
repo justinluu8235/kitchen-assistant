@@ -166,7 +166,7 @@ async function addRecipe(image, userId, name, category) {
     //Find the user and add the recipe to the user
     try {
         user = await User.findByPk(userId);
-        let newRecipe = await user.createRecipe({
+        newRecipe = await user.createRecipe({
             recipeName: name,
             imageURL: image,
             recipeCategoryId: 1
