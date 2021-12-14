@@ -11,15 +11,12 @@
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <link rel="stylesheet" href="../css/cards.css">
   </head>
-
+  
   <body>
-
     <!-- START NAV -->
     <nav class="navbar" >
       <div class="container">
         <div class="navbar-brand">
-         
-        
           <a class="navbar-item" href="/">
             Kitchen Assistant
           </a>
@@ -86,10 +83,7 @@
                 <% } %> 
               <div class="card-content">
                 <div class="media">
-                 
                   <div class="media-content">
-
-
                     <p class="title is-4 no-padding"><%= recipe.recipeName %></p>
                     <br>
                     <p>
@@ -111,35 +105,17 @@
                               <input type="date" name="dateSelected" />
                               <input type="submit" value="Request"/>
                             </form> </span> </p>
-                
                   </div>
                 </div>
                 <div class="content">
-
-                  
                 </div>
               </div>
             </div>
           </div>
-
 <% } %>
         </div>
       </div>
     </div>
-  
-
-    <!-- <script src="../js/cardsData.js"></script> -->
-
-    <!-- Using Vue to populate cards to reduce redundant code
-    <script>
-      var app = new Vue({
-        el: '#app',
-        data: {
-          cardData: cardsData
-        }
-      })
-
-    </script> -->
   </body>
 
 </html>
