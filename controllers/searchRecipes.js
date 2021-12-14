@@ -123,11 +123,21 @@ router.post('/getRecipe', isLoggedIn, async function (req, res) {
     //Create a Recipe and grab its id
     let recipeId = await addRecipe(imageURL, userId, recipeName, "New Recipe");
     for (let i = 0; i < ingredientNameArr.length; i++) {
+        try{
         await addIngredients(recipeId, ingredientNameArr[i], ingredientQuantityArr[i], quantityUnitArr[i]);
+        }
+        catch(err){
+            console.log(err);
+        }
     }
 
     for (let i = 0; i < instructionsArr.length; i++) {
+        try{
         await addRecipeSteps(recipeId, stepNumberArr[i], instructionsArr[i]);
+        }
+        catch(err){
+            console.log(err);
+        }
     }
 
     res.redirect(`/recipes/${recipeId}`);
@@ -156,7 +166,7 @@ async function addRecipe(image, userId, name, category) {
     //Find the user and add the recipe to the user
     try {
         user = await User.findByPk(userId);
-        user.addRecipe(newRecipe);
+        await user.addRecipe(newRecipe);
         user.save();
     }
     catch (err) {
@@ -170,14 +180,14 @@ async function addRecipe(image, userId, name, category) {
             }
         });
         let recipeCategory = result[0];
-        recipeCategory.addRecipe(newRecipe);
+        await recipeCategory.addRecipe(newRecipe);
         recipeCategory.save();
     }
     catch (err) {
         console.log(err);
     }
 
-
+    console.log("HELLOOO",newRecipe);
     return await newRecipe.toJSON().id;
 
 
@@ -194,7 +204,7 @@ async function addIngredients(recipeId, ingredient, quantity, unit) {
     }
 
     try {
-        recipe.createIngredientList({
+        await recipe.createIngredientList({
             ingredientName: ingredient,
             ingredientQuantity: quantity,
             quantityUnit: unit
