@@ -57,7 +57,8 @@ app.use('/userFriends', require('./controllers/userFriends'));
 
 
 app.get('/', isLoggedIn, (req, res) => {
-  res.render('index');
+  const { email } = req.user.get(); 
+  res.render('index' , {email});
 })
 
 app.get('/home', (req, res) => {
