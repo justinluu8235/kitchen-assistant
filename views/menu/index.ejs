@@ -71,12 +71,14 @@
             <h1 class="title" style="color: #EBF2FA;">My Menu</h1><br>
         </div>
     </div>
-        <% for(let date in menu){ %> 
-            <% let menuItemArr = menu[date] %> 
+        <% let dateArr = Object.keys(menu) %> 
+        <% dateArr.sort(); %> 
+        <% for(let i=0; i<dateArr.length; i++){ %> 
+            <% let menuItemArr = menu[dateArr[i]] %> 
       <div class="section">
         <div class="columns">
           <div class="column has-text-centered">
-            <h1 class="head-title" style="color: darkblue;"><%= date %></h1><br>
+            <h1 class="head-title" style="color: darkblue;"><%= dateArr[i] %></h1><br>
           </div>
         </div>
         <div id="app" class="row columns is-multiline">

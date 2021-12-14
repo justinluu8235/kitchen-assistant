@@ -29,7 +29,6 @@ A special someone to help you efficiently manage your kitchen so you can spend m
 - I want to see a list of items to buy, along with quantity
 - I want the option to add, delete, or edit items
 
-
 5. Pantry Manager
 - I want to see a list of items that I always have in my pantry 
 - I want to perform CRUD operations on these
