@@ -306,10 +306,7 @@ async function addRecipe(userId, name, category) {
     // catch (err) {
     //     console.log(err);
     // }
-
-
     return await newRecipe.toJSON().id;
-
 
 }
 
