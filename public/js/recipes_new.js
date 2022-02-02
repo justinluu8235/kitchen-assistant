@@ -30,3 +30,16 @@ addRecipeStepButton.onclick = function(){
 }
 
 
+
+
+
+//DATA URL: sdjfpokdopgfdfggfdg
+// let temp = queryselect('.data-url-input');
+//temp.value = DATA URL 
+
+// const selectElement = document.querySelector('.ice-cream');
+
+// selectElement.addEventListener('change', (event) => {
+//   const result = document.querySelector('.result');
+//   result.textContent = `You like ${event.target.value}`;
+// });

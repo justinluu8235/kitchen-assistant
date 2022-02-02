@@ -10,20 +10,8 @@ A special someone to help you efficiently manage your kitchen so you can spend m
 
 
 ## User Stories
-1. RESTful routes for recipe creation and display 
-- I want to view my recipes 
-- I want to create a recipe based on a dynamic form
-- I want to delete a recipe
-- I want to edit a recipe
 
-2. Search Recipes 
-- I want to search recipes from Spoonacular API
-- I want to take recipes found and add them to my recipes.
 
-3. What's on the Menu page
-- When i view the page, I want to see a breakout of each day of the week 
-- I want to see a date, and what recipes I will be making that day
-- Next to each day, or week, I want a option to take those recipes, and generate a shopping list
 
 4. Shopping List
 - I want to see a list of items to buy, along with quantity
@@ -45,22 +33,33 @@ A special someone to help you efficiently manage your kitchen so you can spend m
 
 ## Key Features
 
-- Manage Your Recipes
+Manage Your Recipes
+- view recipes, create, edit, and delete recipes
 
   - ![View Recipe Screen Shot](./img/manage-recipes.png)
 
-- Search for New Recipes to add to your own
+Search for New Recipes to add to your own
+- search recipes from Spoonacular API
+- save those recipes to the user's recipes
 
   - ![Recipe Search Screen Shot](./img/search-recipe.png)
 
-- Plan your Menu, and request Friend's to cook their recipes
+Plan your Menu, and request friends to cook their recipes
+- menu shows breakout of what recipes are schedule to made on what date
+- your friends can request you to make recipes, and it will appear on your menu showing their request
 
   - ![Menu Screen Shot](./img/menu.png)
 
-- Generate Shopping List from Recipes
+Generate Shopping List from Recipes
+- option to go through the recipes to generate your shopping lists (add recipe ingredients to shopping list)
+- filters through pantry (items you noted you typically already have in your kitchen) and wont add those to your shopping list
 
    - ![Generate Shopping List Screen Shot](./img/generate-ingredients.png)
 
+Friends 
+- able to add friends
+- able to view their recipes and add them to your own 
+- able to request friends to make recipes 
 
 ## Entity Relationship Diagram
 The following ERD details the associations between the user, recipes, and other data.
